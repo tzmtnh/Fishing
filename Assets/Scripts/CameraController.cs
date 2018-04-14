@@ -34,6 +34,7 @@ public class CameraController : MonoBehaviour {
 			case GameManager.GameState.Leaderboard:
 				break;
 			default:
+				Debug.LogError("Unhandled Game State");
 				break;
 		}
 	}
