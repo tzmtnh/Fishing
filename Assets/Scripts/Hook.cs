@@ -30,9 +30,7 @@ public class Hook : MonoBehaviour {
 
 		_rigidbody = GetComponent<Rigidbody2D>();
 
-		rope.positionCount = 2;
 		rope.SetPosition(0, _rigidbody.transform.position);
-		rope.SetPosition(1, _rigidbody.transform.position);
 	}
 
 	void FixedUpdate() {
@@ -61,7 +59,7 @@ public class Hook : MonoBehaviour {
 	}
 
 	void Update() {
-		rope.SetPosition(1, _rigidbody.transform.position);
+		rope.SetPosition(0, _rigidbody.transform.position);
 	}
 
 	void OnTriggerEnter2D(Collider2D collision) {

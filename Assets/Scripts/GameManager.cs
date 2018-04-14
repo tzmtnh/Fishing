@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour {
 		GameState oldState = state;
 		state = newState;
 		onGameStateChanged(oldState, newState);
+		Debug.LogFormat("changing state from {0} to {1}", oldState, newState);
 	}
 
 	void Awake() {
