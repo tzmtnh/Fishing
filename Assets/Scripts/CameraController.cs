@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour {
 
-	public float minHookY = -1;
+	public float hookBoarderY = -1;
 
 	Vector3 _pos;
 
 	void updateFishing() {
-		float deltaY = Rob.inst.hook.transform.position.y - _pos.y;
-		if (deltaY < minHookY) {
-			_pos.y += deltaY - minHookY;
+		float deltaY = Hook.inst.transform.position.y - _pos.y;
+		if (Mathf.Abs(deltaY) > hookBoarderY) {
+			_pos.y += deltaY - hookBoarderY;
 			transform.position = _pos;
 		}
 	}
