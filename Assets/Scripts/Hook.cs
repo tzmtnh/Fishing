@@ -9,7 +9,6 @@ public class Hook : MonoBehaviour {
 
 	public static Hook inst;
 
-	public float maxSpeed = 3;
 	public float reactionSpeed = 20;
 
 	public LineRenderer rope;
@@ -59,10 +58,6 @@ public class Hook : MonoBehaviour {
 				Debug.LogError("Unhandled Rob State");
 				break;
 		}
-
-		//if (_rigidbody.velocity.magnitude > maxSpeed) {
-		//	_rigidbody.velocity = _rigidbody.velocity.normalized * maxSpeed;
-		//}
 	}
 
 	void Update() {
@@ -72,6 +67,9 @@ public class Hook : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D collision) {
 		if (_state == State.GoingDown && collision.CompareTag("Ground")) {
 			_state = State.GoingUp;
+		} else if (_state == State.GoingUp && collision.CompareTag("SeaLevel")) {
+			_state = State.Idle;
+			GameManager.inst.changeState(GameManager.GameState.Fishing);
 		}
 	}
 }
