@@ -67,7 +67,7 @@ public class Hook : MonoBehaviour {
 			_state = State.GoingUp;
 		} else if (_state == State.GoingUp && collision.CompareTag("SeaLevel")) {
 			_state = State.Idle;
-			GameManager.inst.changeState(GameManager.GameState.Fishing);
+			GameManager.inst.changeState(GameManager.GameState.Ninja);
 		}
 	}
 }
