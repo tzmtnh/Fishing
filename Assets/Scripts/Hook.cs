@@ -35,6 +35,7 @@ public class Hook : MonoBehaviour {
 
 	void onGameStateChanged(GameManager.GameState oldState, GameManager.GameState newState) {
 		if (newState == GameManager.GameState.Fishing) {
+			Debug.Log("onGameStateChanged");
 			_state = State.GoingDown;
             Invoke("playCastingLine", 0.2f);
             Invoke("playHookEnterWater", 0.4f);
