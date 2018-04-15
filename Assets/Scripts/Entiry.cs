@@ -23,6 +23,13 @@ public abstract class Entity : MonoBehaviour {
 
 	public virtual void attachTo(Rigidbody2D rb, Collider2D c) {
 		if (_attached) return;
+        // sfx
+        if (isGarbage) {
+            AudioManager.inst.playSound("Hooking_Garbage");
+        } else {
+            AudioManager.inst.playSound("Hooking_Fish");   
+        }
+
 		_attached = true;
 		_rigidbody.mass = 0;
 		_rigidbody.angularVelocity = 0;
@@ -50,6 +57,7 @@ public abstract class Entity : MonoBehaviour {
 
         _attached = false;
         _flying = true;
+        AudioManager.inst.playSound("Leaving_Water");
 
     }
 
@@ -71,6 +79,11 @@ public abstract class Entity : MonoBehaviour {
 	protected virtual void Update()
 	{
 		if (_flying && _rigidbody.position.y < 0.5) {
+            if (isGarbage) {
+                AudioManager.inst.playSound("Garbage_Enter_Water");
+            } else {
+                AudioManager.inst.playSound("Fish_Enter_Water");
+            }
 			TrashSpawner.inst.trashObjList.Remove(this);
 			Destroy(gameObject);
         }
@@ -85,6 +98,11 @@ public abstract class Entity : MonoBehaviour {
             if (ninjaHook.currentVelocity >= ninjaHook.minCutVelocity)
             {
                 Debug.Log("Hook velocity that killed me " + ninjaHook.currentVelocity);
+                if (isGarbage) {
+                    AudioManager.inst.playSound("Garbage_Slice");
+                } else {
+                    AudioManager.inst.playSound("Fish_Slice");
+                }
                 int score = price * (isGarbage ? 1 : -1);
                 GameManager.inst.addScore(score, transform.position);
                 TrashSpawner.inst.trashObjList.Remove(this);

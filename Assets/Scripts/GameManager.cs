@@ -5,62 +5,87 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using TMPro;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
 
-	public enum GameState { StartMenu, Fishing, Ninja, EndGame, Leaderboard }
+    public enum GameState { StartMenu, Fishing, Ninja, EndGame, Leaderboard }
 
-	public static GameManager inst;
-	public static event Action<GameState, GameState> onGameStateChanged;
+    public static GameManager inst;
+    public static event Action<GameState, GameState> onGameStateChanged;
 
-	public GameState state;
-	public int score;
+    public GameState state;
+    public int score;
 
-	public TextMeshPro positiveScore;
-	public TextMeshPro negativeScore;
+    public TextMeshPro positiveScore;
+    public TextMeshPro negativeScore;
 
-	public void changeState(GameState newState, bool forceUpdate = false) {
-		if (newState == state && forceUpdate == false) return;
-		GameState oldState = state;
-		state = newState;
+    public void changeState(GameState newState, bool forceUpdate = false)
+    {
+        if (newState == state && forceUpdate == false) return;
+        GameState oldState = state;
+        state = newState;
 
-		if (state == GameState.Fishing) {
-			score = 0;
-		}
+        switch (state)
+        {
+            case GameState.Fishing:
+                score = 0;
+                AudioManager.inst.playFishingMusic();
+                break;
+            case GameState.Ninja:
+                AudioManager.inst.playNinjaMusic();
+                break;
+            case GameState.EndGame:
+                AudioManager.inst.playThemeMusic();
+                break;
+            default:
+                break;
+        }
 
-		if (onGameStateChanged != null) {
-			onGameStateChanged(oldState, newState);
-		}
-	}
 
-	public void addScore(int scoreToAdd, Vector3 pos) {
-		score += scoreToAdd;
-		StartCoroutine(animateScore(scoreToAdd, pos));
-	}
+        if (onGameStateChanged != null)
+        {
+            onGameStateChanged(oldState, newState);
+        }
+    }
 
-	IEnumerator animateScore(int scoreToAdd, Vector3 pos) {
-		TextMeshPro scoreText = Instantiate(scoreToAdd > 0 ? positiveScore : negativeScore);
-		scoreText.transform.position = pos;
-		scoreText.text = (scoreToAdd > 0 ? "+" : "") + scoreToAdd + "$";
+    public void addScore(int scoreToAdd, Vector3 pos)
+    {
+        score += scoreToAdd;
+        StartCoroutine(animateScore(scoreToAdd, pos));
+    }
 
-		const float duration = 1;
-		const float speed = 1.5f;
+    IEnumerator animateScore(int scoreToAdd, Vector3 pos)
+    {
+        TextMeshPro scoreText = Instantiate(scoreToAdd > 0 ? positiveScore : negativeScore);
+        scoreText.transform.position = pos;
+        scoreText.text = (scoreToAdd > 0 ? "+" : "") + scoreToAdd + "$";
 
-		float timer = 0;
-		while(timer < duration) {
-			float t = timer / duration;
-			float dt = Time.deltaTime;
+        const float duration = 1;
+        const float speed = 1.5f;
 
-			scoreText.alpha = 1f - t;
-			scoreText.transform.position += Vector3.up * (dt * speed);
+        float timer = 0;
+        while (timer < duration)
+        {
+            float t = timer / duration;
+            float dt = Time.deltaTime;
 
-			timer += dt;
-			yield return null;
-		}
-	}
+            scoreText.alpha = 1f - t;
+            scoreText.transform.position += Vector3.up * (dt * speed);
 
-	void Awake() {
-		Assert.IsNull(inst);
-		inst = this;
-		changeState(GameState.StartMenu, true);
+            timer += dt;
+            yield return null;
+        }
+    }
+
+    void Awake()
+    {
+        Assert.IsNull(inst);
+        inst = this;
+        changeState(GameState.StartMenu, true);
+    }
+
+	private void Start()
+	{
+        AudioManager.inst.playThemeMusic();
 	}
 }
