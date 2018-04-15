@@ -153,6 +153,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 1
+  score: 0
+  positiveScore: {fileID: 114202194594855302, guid: 76ed2bd36304ef646a0c058fa41a6029,
+    type: 2}
+  negativeScore: {fileID: 114087465381636622, guid: 214b720179e3a684ca2bc49455a410f8,
+    type: 2}
 --- !u!114 &114806902743604918
 MonoBehaviour:
   m_ObjectHideFlags: 1

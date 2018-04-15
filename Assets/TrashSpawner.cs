@@ -9,17 +9,16 @@ public class TrashSpawner : MonoBehaviour {
     public float startForce = 10f;
     public List<Entity> trashObjList;
 
-    public static TrashSpawner trashSpawnerInstance = null;
+    public static TrashSpawner inst = null;
 
     Rigidbody2D rb;
 
 	private void Awake()
 	{
-        trashSpawnerInstance = this;
+        inst = this;
         GameManager.onGameStateChanged += _start;
 	}
 
-	// Use this for initialization
 	void Start () {
         trashObjList = new List<Entity>();
 	}
@@ -39,9 +38,17 @@ public class TrashSpawner : MonoBehaviour {
             //Destroy(spawnedTrash, 5f);
         }
     }
-	
-	// Update is called once per frame
+
+	void showEndGameMenu() {
+		GameManager.inst.changeState(GameManager.GameState.EndGame);
+	}
+
+	bool _gameEnded = false;
 	void Update () {
-		
+		if (_gameEnded) return;
+		if (GameManager.inst.state == GameManager.GameState.Ninja && trashObjList.Count == 0) {
+			_gameEnded = true;
+			Invoke("showEndGameMenu", 1);
+		}
 	}
 }

@@ -8,17 +8,18 @@ public class UIManager : MonoBehaviour {
 	public static UIManager inst;
 
 	public GameObject startMenu;
+	public GameObject endGameMenu;
 
 	GameObject[] _menues;
 
 	GameObject getMenuByState(GameManager.GameState state) {
 		switch (state) {
-			case GameManager.GameState.StartMenu: return startMenu;
-			case GameManager.GameState.Fishing:
-			case GameManager.GameState.Ninja:
-			case GameManager.GameState.EndGame:
-			case GameManager.GameState.Leaderboard:
-			default: return null;
+			case GameManager.GameState.StartMenu:	return startMenu;
+			case GameManager.GameState.Fishing:		return null;
+			case GameManager.GameState.Ninja:		return null;
+			case GameManager.GameState.EndGame:		return endGameMenu;
+			case GameManager.GameState.Leaderboard: return null;
+			default:								return null;
 		}
 	}
 
@@ -39,7 +40,8 @@ public class UIManager : MonoBehaviour {
 
 		GameManager.onGameStateChanged += onGameStateChanged;
 
-		_menues = new GameObject[1];
+		_menues = new GameObject[2];
 		_menues[0] = startMenu;
+		_menues[1] = endGameMenu;
 	}
 }

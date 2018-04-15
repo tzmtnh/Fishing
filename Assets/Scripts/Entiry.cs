@@ -74,12 +74,25 @@ public abstract class Entity : MonoBehaviour {
 		Physics2D.IgnoreLayerCollision(layer, layer, true);
 	}
 
-	private void Update()
+	protected virtual void Update()
 	{
-        if (_flying && _rigidbody.position.y < 0.5) {
-            Destroy(gameObject);
+		if (_flying && _rigidbody.position.y < 0.5) {
+			TrashSpawner.inst.trashObjList.Remove(this);
+			Destroy(gameObject);
         }
 	}
 
+	protected virtual void onCollisionEnter2D(Collision2D collision) { }
 
+	private void OnCollisionEnter2D(Collision2D collision) {
+		if (collision.collider.CompareTag("NinjaHook")) {
+			int score = price * (isGarbage ? 1 : -1);
+			GameManager.inst.addScore(score, transform.position);
+			TrashSpawner.inst.trashObjList.Remove(this);
+			Destroy(gameObject);
+			return;
+		}
+
+		onCollisionEnter2D(collision);
+	}
 }

@@ -18,16 +18,16 @@ public class Fish : Entity {
 		}
 	}
 
-	void Update() {
+	protected override void Update() {
+		base.Update();
 		if (_attached) return;
 		_sprite.flipX = _dir > 0;
 	}
 
-    private void OnCollisionEnter2D(Collision2D collision) {
+    protected override void onCollisionEnter2D(Collision2D collision) {
+		if (GameManager.inst.state != GameManager.GameState.Fishing) return;
         if (collision.collider.CompareTag("Side")) {
 			_dir = -_dir;
-        }  else if (collision.collider.CompareTag( "NinjaHook")) {
-            Destroy(gameObject);
         }
 	}
 

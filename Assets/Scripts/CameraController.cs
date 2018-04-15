@@ -25,7 +25,7 @@ public class CameraController : MonoBehaviour {
         // find lowest object
         float min_y = 1000;
         bool all_null = true;
-        TrashSpawner trashSpawner = TrashSpawner.trashSpawnerInstance;
+        TrashSpawner trashSpawner = TrashSpawner.inst;
         foreach (Entity go in trashSpawner.trashObjList)
         {
             if (go == null)
