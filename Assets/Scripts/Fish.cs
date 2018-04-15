@@ -13,11 +13,13 @@ public class Fish : Entiry {
 	}
 
 	void FixedUpdate() {
-		_rigidbody.AddForce(new Vector2(_dir * speed, 0));
-		_rigidbody.rotation = 0;
+		if (_attached == false) {
+			_rigidbody.AddForce(new Vector2(_dir * speed, 0));
+		}
 	}
 
 	void Update() {
+		if (_attached) return;
 		_sprite.flipX = _dir > 0;
 	}
 

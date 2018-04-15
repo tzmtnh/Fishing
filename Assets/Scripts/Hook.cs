@@ -14,7 +14,12 @@ public class Hook : MonoBehaviour {
 	public LineRenderer rope;
 
 	State _state = State.Idle;
+	Collider2D _collider;
+
 	Rigidbody2D _rigidbody;
+	public Rigidbody2D rigidbody {
+		get { return _rigidbody; }
+	}
 
 	void updateLeftRight() {
 		if (Input.GetKey(KeyCode.LeftArrow)) {
@@ -29,6 +34,7 @@ public class Hook : MonoBehaviour {
 		inst = this;
 
 		_rigidbody = GetComponent<Rigidbody2D>();
+		_collider = GetComponent<Collider2D>();
 
 		rope.SetPosition(0, _rigidbody.transform.position);
 	}
@@ -66,7 +72,7 @@ public class Hook : MonoBehaviour {
 		if (collision.collider.CompareTag("Entiry")) {
 			Entiry entiry = collision.collider.GetComponent<Entiry>();
 			Assert.IsNotNull(entiry);
-			entiry.attachTo(_rigidbody);
+			entiry.attachTo(_rigidbody, _collider);
 			if (_state == State.GoingDown) {
 				_state = State.GoingUp;
 			}
