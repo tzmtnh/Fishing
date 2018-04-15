@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0f616c8b95582540bfdf2f108aa3725, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  population: 5
+  population: 4
   price: 50
   startForce: 10
   probabilityByDepth:

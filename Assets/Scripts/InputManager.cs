@@ -26,9 +26,6 @@ public class InputManager : MonoBehaviour {
 		}
 	}
 
-	float _angle;
-	Vector3 _angles;
-	float debug;
 	void Update () {
 		horizontal = 0;
 		click = false;
@@ -38,7 +35,6 @@ public class InputManager : MonoBehaviour {
 				Touch touch = Input.touches[0];
 				if (touch.phase != TouchPhase.Canceled) {
 					float x = touch.position.x / Screen.width;
-					debug = x;
 					if (x < 0.3f) {
 						horizontal = -1;
 					} else if (x > 0.7f) {
