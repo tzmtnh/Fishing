@@ -6,6 +6,7 @@ using System;
 public abstract class Entity : MonoBehaviour {
 
 	public int price = 10;
+    public float startForce = 10f;
 	public AnimationCurve probabilityByDepth = new AnimationCurve();
 
 	bool _isGarbage;
@@ -19,6 +20,7 @@ public abstract class Entity : MonoBehaviour {
 	protected Collider2D _collider;
 
 	protected bool _attached = false;
+    protected bool _flying = false;
 	float _initMass;
 
 	public void attachTo(Rigidbody2D rb, Collider2D c) {
@@ -35,6 +37,15 @@ public abstract class Entity : MonoBehaviour {
 		Physics2D.IgnoreCollision(_collider, c, true);
 	}
 
+    public void detachAndLaunch() {
+        _rigidbody.mass = _initMass;
+        _rigidbody.AddForce(transform.up * startForce, ForceMode2D.Impulse);
+        _rigidbody.AddTorque(UnityEngine.Random.Range(-200f, 200f));
+        _attached = false;
+        _flying = true;
+
+    }
+
 	void Awake() {
 		_collider = GetComponent<Collider2D>();
 		_sprite = GetComponent<SpriteRenderer>();
@@ -49,4 +60,10 @@ public abstract class Entity : MonoBehaviour {
 		Physics2D.IgnoreLayerCollision(layer, layer, true);
 	}
 
+	private void Update()
+	{
+        //if (_flying && _rigidbody.position.y < 0) {
+        //    Destroy(gameObject);
+        //}
+	}
 }

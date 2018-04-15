@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class TrashSpawner : MonoBehaviour {
 
-    public GameObject trashPrefab;
+    public Entity trashPrefab;
     public Transform[] spawnPoints;
-    public float minDelay = .01f;
-    public float maxDelay = .1f;
     public int maxSpawns = 20;
-    public List<GameObject> trashObjList;
+    public float startForce = 10f;
+    public List<Entity> trashObjList;
 
     public static TrashSpawner trashSpawnerInstance = null;
+
+    Rigidbody2D rb;
 
 	private void Awake()
 	{
@@ -21,7 +22,7 @@ public class TrashSpawner : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        trashObjList = new List<GameObject>();
+        trashObjList = new List<Entity>();
 	}
 
     void _start(GameManager.GameState old, GameManager.GameState current) {
@@ -33,7 +34,13 @@ public class TrashSpawner : MonoBehaviour {
             Quaternion tmp = spawnPoint.rotation;
             tmp.z += Random.Range(-0.025f, 0.025f);
             spawnPoint.rotation = tmp;
-            GameObject spawnedTrash = Instantiate(trashPrefab, spawnPoint.position, spawnPoint.rotation);
+            Entity spawnedTrash = Instantiate(trashPrefab, spawnPoint.position, spawnPoint.rotation);
+                //rb = spawnedTrash.GetComponent<Rigidbody2D>();
+                //rb.AddForce(transform.up * startForce, ForceMode2D.Impulse);
+                //rb.AddTorque(Random.Range(-200f, 200f));
+                //spawnedTrash._attached = false;
+                //spawnedTrash._flying = true;
+            spawnedTrash.detachAndLaunch();
             trashObjList.Add(spawnedTrash);
             //Destroy(spawnedTrash, 5f);
         }

@@ -6,6 +6,7 @@ using UnityEngine.Assertions;
 public class Entities : MonoBehaviour {
 
 	public static Entities inst;
+    public bool isFlying = false;
 
 	public int numEntities = 100;
 	public Vector2 depthRange = new Vector2(-1, -80);

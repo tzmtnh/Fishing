@@ -138,11 +138,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fa3cad810cbe4164b567b320def4f8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trashPrefab: {fileID: 1648075052115646, guid: 3fb6b683cf3354a38891003926f302a8,
-    type: 2}
+  trashPrefab: {fileID: 0}
   spawnPoints:
   - {fileID: 4693383122578518}
   - {fileID: 4152018687714854}
   - {fileID: 4491565942293160}
-  minDelay: 0.1
-  maxDelay: 1
+  maxSpawns: 20
+  startForce: 10
+  trashObjList: []
