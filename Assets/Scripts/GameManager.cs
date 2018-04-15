@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 	public enum GameState { StartMenu, Fishing, Ninja, EndGame, Leaderboard }
 
     public static GameManager inst;
-    public static event Action<GameState, GameState> onGameStateChanged;
+    public event Action<GameState, GameState> onGameStateChanged;
 
     public GameState state;
     public int score;

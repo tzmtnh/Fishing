@@ -16,7 +16,7 @@ public class TrashSpawner : MonoBehaviour {
 	private void Awake()
 	{
         inst = this;
-        GameManager.onGameStateChanged += _start;
+        GameManager.inst.onGameStateChanged += _start;
 	}
 
 	void Start () {
