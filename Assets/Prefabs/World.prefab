@@ -870,8 +870,15 @@ MonoBehaviour:
   numEntities: 40
   depthRange: {x: -2.1, y: -66.28}
   entityPrefabs:
-  - {fileID: 114054355783132234, guid: de6846b8f76c4bf4e9467a90ab678e85, type: 2}
+  - {fileID: 114420137010470324, guid: 41324e97e2f62c44d86efb24536a575f, type: 2}
+  - {fileID: 114815146430334084, guid: 62e7bb74fcd51f242ad8da14f232c52f, type: 2}
+  - {fileID: 114237113223601298, guid: 04b62693dc31d244382af56b4a812e18, type: 2}
+  - {fileID: 114251682324793388, guid: b95b87de24c321947a2d94fed97fec34, type: 2}
+  - {fileID: 114860366246471734, guid: f75a9478953086a4a94fcc7daef039df, type: 2}
   - {fileID: 114681421134723068, guid: ac106e6dfed282a4684fe7a81234df08, type: 2}
+  - {fileID: 114250431328910644, guid: 263dc7439144be34bb5ff22cc7ce9ec2, type: 2}
+  - {fileID: 114419458651279956, guid: 811e8887c9a9c9b40ba8c5b5b36c2eff, type: 2}
+  - {fileID: 114054355783132234, guid: de6846b8f76c4bf4e9467a90ab678e85, type: 2}
 --- !u!120 &120713602649819152
 LineRenderer:
   m_ObjectHideFlags: 1
