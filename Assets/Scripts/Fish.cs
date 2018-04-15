@@ -13,7 +13,7 @@ public class Fish : Entity {
 	}
 
 	void FixedUpdate() {
-        if (_attached == false && _flying) {
+        if (_attached == false && _flying == false) {
 			_rigidbody.AddForce(new Vector2(_dir * speed, 0));
 		}
 	}

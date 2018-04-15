@@ -76,7 +76,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.16, y: 0.13}
+  m_Size: {x: 0.12, y: 0.1}
   m_Direction: 1
 --- !u!114 &114681421134723068
 MonoBehaviour:
@@ -90,6 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   price: 5
+  startForce: 10
   probabilityByDepth:
     serializedVersion: 2
     m_Curve:
