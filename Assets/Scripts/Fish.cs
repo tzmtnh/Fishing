@@ -13,7 +13,7 @@ public class Fish : Entity {
 	}
 
 	void FixedUpdate() {
-		if (_attached == false) {
+        if (_attached == false && _flying) {
 			_rigidbody.AddForce(new Vector2(_dir * speed, 0));
 		}
 	}
@@ -26,7 +26,9 @@ public class Fish : Entity {
 	private void OnCollisionEnter2D(Collision2D collision) {
 		if (collision.collider.CompareTag("Side")) {
 			_dir = -_dir;
-		}
+        } else if (collision.collider.CompareTag( "NinjaHook")) {
+            Destroy(gameObject);
+        }
 	}
 
 }
