@@ -44,6 +44,8 @@ public abstract class Entity : MonoBehaviour {
         _joint.enabled = false;
         _rigidbody.drag = 0.25f;
         _rigidbody.gravityScale = 0.25f;
+        LayerMask layer = LayerMask.NameToLayer("Entities");
+        Physics2D.IgnoreLayerCollision(layer, layer, false);
         _rigidbody.AddForce(transform.up *
                             UnityEngine.Random.Range(0.7f, 1.3f) * startForce * _initMass,
                             ForceMode2D.Impulse);
