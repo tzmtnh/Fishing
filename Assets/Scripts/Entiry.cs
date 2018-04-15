@@ -97,7 +97,7 @@ public abstract class Entity : MonoBehaviour {
 
             if (ninjaHook.currentVelocity >= ninjaHook.minCutVelocity)
             {
-                Debug.Log("Hook velocity that killed me " + ninjaHook.currentVelocity);
+                //Debug.Log("Hook velocity that killed me " + ninjaHook.currentVelocity);
                 if (isGarbage) {
                     AudioManager.inst.playSound("Garbage_Slice");
                 } else {

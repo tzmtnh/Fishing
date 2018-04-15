@@ -37,6 +37,10 @@ public class GameManager : MonoBehaviour
         GameState oldState = state;
         state = newState;
 
+		if (onGameStateChanged != null) {
+			onGameStateChanged(oldState, newState);
+		}
+
         switch (state)
         {
             case GameState.Fishing:
