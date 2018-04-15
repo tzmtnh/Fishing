@@ -16,7 +16,7 @@ public class Entities : MonoBehaviour {
 		for (int i = 0; i < numEntities; i++) {
 			float depthParam = i / (numEntities - 1f);
 			float y = Mathf.Lerp(depthRange.x, depthRange.y, depthParam);
-			float x = Random.Range(-5f, 5f);
+			float x = Random.Range(-3f, 3f);
 
 			float totalWeight = 0;
 			foreach (Entity ep in entityPrefabs) {
