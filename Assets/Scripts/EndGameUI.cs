@@ -9,7 +9,7 @@ public class EndGameUI : MonoBehaviour {
 
 	void OnEnable() {
 		if (scoreText != null) {
-			scoreText.text = GameManager.inst.score + "$";
+			scoreText.text = "$" + GameManager.inst.score;
 		}
 	}
 }

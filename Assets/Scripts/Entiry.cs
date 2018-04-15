@@ -80,11 +80,17 @@ public abstract class Entity : MonoBehaviour {
 
 	private void OnCollisionEnter2D(Collision2D collision) {
 		if (collision.collider.CompareTag("NinjaHook")) {
-			int score = price * (isGarbage ? 1 : -1);
-			GameManager.inst.addScore(score, transform.position);
-			TrashSpawner.inst.trashObjList.Remove(this);
-			Destroy(gameObject);
-			return;
+            NinjaHook ninjaHook = collision.collider.transform.GetComponent<NinjaHook>();
+
+            if (ninjaHook.currentVelocity >= ninjaHook.minCutVelocity)
+            {
+                Debug.Log("Hook velocity that killed me " + ninjaHook.currentVelocity);
+                int score = price * (isGarbage ? 1 : -1);
+                GameManager.inst.addScore(score, transform.position);
+                TrashSpawner.inst.trashObjList.Remove(this);
+                Destroy(gameObject);
+                return;
+            }
 		}
 
 		onCollisionEnter2D(collision);

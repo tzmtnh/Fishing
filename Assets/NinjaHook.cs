@@ -7,7 +7,9 @@ public class NinjaHook : MonoBehaviour {
     public GameObject ninjaHookTrailPrefab;
     GameObject currentTrail;
 
-    public float minCutVelocity = 0.001f;
+    public float minCutVelocity = .008f;
+    public float gentleCutThreshold = .005f;
+    public float currentVelocity = 0.0f;
     Vector2 previousPosition;
 
     public bool isCutting = false; 
@@ -33,7 +35,7 @@ public class NinjaHook : MonoBehaviour {
             return;
         }
             
-        if (Input.GetMouseButtonDown(0)) {
+        if (!isCutting && Input.GetMouseButtonDown(0)) {
             startCutting();
         } else if (Input.GetMouseButtonUp(0)) {
             stopCutting();
@@ -51,24 +53,28 @@ public class NinjaHook : MonoBehaviour {
         transform.position = getPosition();
         currentTrail = Instantiate(ninjaHookTrailPrefab, transform);
         currentTrail.transform.localPosition = new Vector3();
+        previousPosition = rb.position;
+        currentVelocity = 0.0f;
+        circleCollider2D.enabled = true;
     }
 
     void stopCutting() {
         isCutting = false;
         currentTrail.transform.SetParent(null);
         Destroy(currentTrail, 2f);
+        currentVelocity = 0.0f;
         circleCollider2D.enabled = false;
     }
 
     void updateCut() {
         rb.position = getPosition();
-        float velocity = (rb.position - previousPosition).magnitude * Time.deltaTime;
+        currentVelocity = (rb.position - previousPosition).magnitude * Time.deltaTime;
 
-        if (velocity > minCutVelocity) {
-            circleCollider2D.enabled = true;
-        } else {
-            circleCollider2D.enabled = false;
-        }
+        //if (velocity > minCutVelocity) {
+        //    circleCollider2D.enabled = true;
+        //} else {
+        //    circleCollider2D.enabled = false;
+        //}
         previousPosition = rb.position;
         //Debug.Log("pos = " + rb.position);
     }
