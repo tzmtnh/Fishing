@@ -8,6 +8,7 @@ public class Entities : MonoBehaviour {
 	public static Entities inst;
 
 	public int numEntities = 100;
+	public float densityMultiplier = 1;
 	public Vector2 depthRange = new Vector2(-1, -80);
 
 	public Entity[] entityPrefabs;
@@ -34,7 +35,8 @@ public class Entities : MonoBehaviour {
 
 	void generateEntities() {
 		foreach (Entity prefab in entityPrefabs) {
-			for (int i = 0; i < prefab.population; i++) {
+			int n = Mathf.RoundToInt(prefab.population * densityMultiplier);
+			for (int i = 0; i < n; i++) {
 				float r = getRandomValueByDistribution(prefab.probabilityByDepth);
 				float y = Mathf.Lerp(depthRange.x, depthRange.y, r);
 				float w = prefab.isGarbage ? 4f : 1f;
