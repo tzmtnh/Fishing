@@ -48,7 +48,7 @@ public class Fish : Entity {
             {
                 Debug.Log("Hook velocity that released me (Turtle)" + ninjaHook.currentVelocity);
                 int score = 2 * price;
-                GameManager.inst.addScore(score, transform.position);
+                GameManager.inst.addScore(this, score);
                 //TrashSpawner.inst.trashObjList.Remove(this);
                 _spriteRenderer.sprite = FREE_VERSION;
                 isTurtle = false; 

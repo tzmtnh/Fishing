@@ -15,6 +15,8 @@ public abstract class Entity : MonoBehaviour {
 	public bool isGarbage { get { return GetType() == typeof(Garbage); } }
 	public bool isFish { get { return GetType() == typeof(Fish); } }
 
+	public Sprite sprite { get { return _sprite.sprite; } }
+
 	protected Rigidbody2D _rigidbody;
 	protected SpriteRenderer _sprite;
 	protected Collider2D _collider;
@@ -87,7 +89,7 @@ public abstract class Entity : MonoBehaviour {
             {
                 Debug.Log("Hook velocity that killed me " + ninjaHook.currentVelocity);
                 int score = price * (isGarbage ? 1 : -1);
-                GameManager.inst.addScore(score, transform.position);
+                GameManager.inst.addScore(this, score);
                 TrashSpawner.inst.trashObjList.Remove(this);
                 Destroy(gameObject);
                 return;

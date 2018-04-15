@@ -41,6 +41,7 @@ public class Entities : MonoBehaviour {
 				float x = Random.Range(-1f, 1f) * w;
 
 				Entity entity = Instantiate(prefab, transform);
+				entity.name = prefab.name;
 				entity.transform.position = new Vector3(x, y, 0);
 			}
 		}
