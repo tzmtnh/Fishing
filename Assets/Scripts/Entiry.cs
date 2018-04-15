@@ -27,6 +27,7 @@ public abstract class Entity : MonoBehaviour {
 		if (_attached) return;
 		_attached = true;
 		_rigidbody.mass = 0;
+		_rigidbody.angularVelocity = 0;
 
 		WheelJoint2D joint = gameObject.AddComponent<WheelJoint2D>();
 		joint.connectedBody = rb;

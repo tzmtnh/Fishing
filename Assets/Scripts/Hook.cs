@@ -21,6 +21,9 @@ public class Hook : MonoBehaviour {
 		get { return _rigidbody; }
 	}
 
+	[System.NonSerialized]
+	public List<Entity> attachedEntities = new List<Entity>(32);
+
 	void updateLeftRight() {
 		float horizontal = InputManager.inst.horizontal;
 		if (Mathf.Approximately(horizontal, 0)) return;
@@ -74,6 +77,8 @@ public class Hook : MonoBehaviour {
 			Entity entiry = collision.collider.GetComponent<Entity>();
 			Assert.IsNotNull(entiry);
 			entiry.attachTo(_rigidbody, _collider);
+			attachedEntities.Add(entiry);
+
 			if (_state == State.GoingDown) {
 				_state = State.GoingUp;
 			}
