@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc3e2d65c03111b4d860a72a59adf17f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  population: 10
+  population: 8
   price: 5
   startForce: 10
   probabilityByDepth:
@@ -122,6 +122,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+  FREE_VERSION: {fileID: 0}
   speed: 1
 --- !u!212 &212263885653689858
 SpriteRenderer:
