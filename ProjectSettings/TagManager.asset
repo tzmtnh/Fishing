@@ -9,6 +9,7 @@ TagManager:
   - Entiry
   - Side
   - Hook
+  - NinjaHook
   layers:
   - Default
   - TransparentFX
