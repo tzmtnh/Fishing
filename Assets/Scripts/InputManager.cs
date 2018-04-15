@@ -67,6 +67,14 @@ public class InputManager : MonoBehaviour {
 			if (Input.GetKey(KeyCode.RightArrow)) {
 				horizontal = 1;
 			}
+
+			if (Input.GetMouseButton(0)) {
+				horizontal = -1;
+			}
+
+			if (Input.GetMouseButton(1)) {
+				horizontal = 1;
+			}
 		}
 	}
 
