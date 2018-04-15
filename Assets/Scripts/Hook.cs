@@ -70,6 +70,10 @@ public class Hook : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D collision) {
+        if (GameManager.inst.state != (GameManager.GameState.Fishing))
+        {
+            return;
+        }
 		if (collision.collider.CompareTag("Entiry")) {
 			Entity entiry = collision.collider.GetComponent<Entity>();
 			Assert.IsNotNull(entiry);

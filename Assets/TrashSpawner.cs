@@ -5,8 +5,7 @@ using UnityEngine;
 public class TrashSpawner : MonoBehaviour {
 
     public Entity trashPrefab;
-    public Transform[] spawnPoints;
-    public int maxSpawns = 20;
+    public int maxSpawns = 15;
     public float startForce = 10f;
     public List<Entity> trashObjList;
 
@@ -26,11 +25,12 @@ public class TrashSpawner : MonoBehaviour {
 	}
 
     void _start(GameManager.GameState old, GameManager.GameState current) {
-        if (current.Equals(GameManager.GameState.Ninja))
+        if (!current.Equals(GameManager.GameState.Ninja)) {
+            return;
+        }
 
         for (int i = 0; i < maxSpawns; i++) {
-            int spawnIndex = Random.Range(0, spawnPoints.Length);
-            Transform spawnPoint = spawnPoints[spawnIndex];
+            Transform spawnPoint = Hook.inst.rigid.transform;
             Quaternion tmp = spawnPoint.rotation;
             tmp.z += Random.Range(-0.025f, 0.025f);
             spawnPoint.rotation = tmp;
