@@ -11,7 +11,7 @@ public class Hook : MonoBehaviour {
 
 	public float reactionSpeed = 20f;
 
-    public float recenteringSpeedModifier = 2f;
+    public float recenteringSpeedModifier = 6f;
 
 	public Transform rob;
 	public LineRenderer rope;
@@ -72,9 +72,11 @@ public class Hook : MonoBehaviour {
 				Debug.LogError("Unhandled Rob State");
 				break;
 		}
+        // pendulum motion of hook towards center.
         Vector2 pos = _rigidbody.position;
         pos.x = 0.43f;
-        _rigidbody.AddForce((pos - _rigidbody.position) * recenteringSpeedModifier);
+        _rigidbody.AddForce((pos - _rigidbody.position) * recenteringSpeedModifier /
+                            (Mathf.Abs(pos.y) + 0.15f));
 		_rigidbody.angularVelocity = 0;
 		_rigidbody.rotation = 0;
 	}
