@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Waves BG
+  m_Name: Waves MG
   m_Shader: {fileID: 4800000, guid: 862c1f28bfe5fa84ca30a432f0eb0261, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -24,7 +24,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Cutoff: 0.5
-    - _Frequency: 1.8
+    - _Frequency: 1.5
     - _Speed: 0.2
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
