@@ -332,7 +332,7 @@ Prefab:
     - target: {fileID: 114295187593821796, guid: c442bb50dc76ac645bf83e41a950b5df,
         type: 2}
       propertyPath: audioElements.Array.size
-      value: 14
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 4625809925725176, guid: c442bb50dc76ac645bf83e41a950b5df, type: 2}
       propertyPath: m_LocalPosition.x
@@ -646,6 +646,56 @@ Prefab:
       propertyPath: audioElements.Array.data[12].defaultPitch
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114295187593821796, guid: c442bb50dc76ac645bf83e41a950b5df,
+        type: 2}
+      propertyPath: audioElements.Array.data[13].defaultVolume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114295187593821796, guid: c442bb50dc76ac645bf83e41a950b5df,
+        type: 2}
+      propertyPath: audioElements.Array.data[13].defaultPitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114295187593821796, guid: c442bb50dc76ac645bf83e41a950b5df,
+        type: 2}
+      propertyPath: audioElements.Array.data[14].name
+      value: Reverse_SFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 114295187593821796, guid: c442bb50dc76ac645bf83e41a950b5df,
+        type: 2}
+      propertyPath: audioElements.Array.data[14].defaultVolume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114295187593821796, guid: c442bb50dc76ac645bf83e41a950b5df,
+        type: 2}
+      propertyPath: audioElements.Array.data[14].defaultPitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114295187593821796, guid: c442bb50dc76ac645bf83e41a950b5df,
+        type: 2}
+      propertyPath: audioElements.Array.data[14].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8150dc8f627b7435cbdc7de1cd9bb501, type: 3}
+    - target: {fileID: 114295187593821796, guid: c442bb50dc76ac645bf83e41a950b5df,
+        type: 2}
+      propertyPath: audioElements.Array.data[15].name
+      value: Machine_Gun
+      objectReference: {fileID: 0}
+    - target: {fileID: 114295187593821796, guid: c442bb50dc76ac645bf83e41a950b5df,
+        type: 2}
+      propertyPath: audioElements.Array.data[15].defaultVolume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114295187593821796, guid: c442bb50dc76ac645bf83e41a950b5df,
+        type: 2}
+      propertyPath: audioElements.Array.data[15].defaultPitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114295187593821796, guid: c442bb50dc76ac645bf83e41a950b5df,
+        type: 2}
+      propertyPath: audioElements.Array.data[15].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 94c56872212604211a65b1b65ade3a0e, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c442bb50dc76ac645bf83e41a950b5df, type: 2}
   m_IsPrefabParent: 0
