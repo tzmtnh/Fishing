@@ -972,7 +972,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   frequency: 2
-  amplitude: 3
+  amplitude: 2
 --- !u!114 &114833138399379298
 MonoBehaviour:
   m_ObjectHideFlags: 1
