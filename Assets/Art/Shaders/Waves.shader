@@ -32,7 +32,7 @@ Shader "Shader Forge/Waves" {
             #define UNITY_PASS_FORWARDBASE
             #include "UnityCG.cginc"
             #pragma multi_compile_fwdbase
-            #pragma only_renderers d3d9 d3d11 glcore gles 
+            #pragma only_renderers d3d9 d3d11 glcore gles gles3 metal 
             #pragma target 3.0
             uniform float4 _Foam;
             uniform sampler2D _Waves; uniform float4 _Waves_ST;
@@ -82,7 +82,7 @@ Shader "Shader Forge/Waves" {
             #include "Lighting.cginc"
             #pragma fragmentoption ARB_precision_hint_fastest
             #pragma multi_compile_shadowcaster
-            #pragma only_renderers d3d9 d3d11 glcore gles 
+            #pragma only_renderers d3d9 d3d11 glcore gles gles3 metal 
             #pragma target 3.0
             uniform sampler2D _Waves; uniform float4 _Waves_ST;
             uniform float _Speed;
