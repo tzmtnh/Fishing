@@ -13,6 +13,7 @@ public class Hook : MonoBehaviour {
 
     public float recenteringSpeedModifier = 2f;
 
+	public Transform rob;
 	public LineRenderer rope;
 
 	State _state = State.Idle;
@@ -46,6 +47,7 @@ public class Hook : MonoBehaviour {
 		_collider = GetComponent<Collider2D>();
 
 		rope.SetPosition(0, _rigidbody.transform.position);
+		rope.SetPosition(1, rob.position);
 
 		GameManager.onGameStateChanged += onGameStateChanged;
 	}
@@ -79,6 +81,7 @@ public class Hook : MonoBehaviour {
 
 	void Update() {
 		rope.SetPosition(0, _rigidbody.transform.position);
+		rope.SetPosition(1, rob.position);
 	}
 
 	void OnCollisionEnter2D(Collision2D collision) {
