@@ -23,6 +23,7 @@ public class EndGameUI : MonoBehaviour {
 		WaitForSeconds shortWait = new WaitForSeconds(0.06f);
 		WaitForSeconds longWait = new WaitForSeconds(0.5f);
 
+        AudioSource sound = AudioManager.inst.playSound("Machine_Gun", 0.5f, 1f, true);
 		foreach (GameManager.ScoreEntry entry in scoreEntries) {
 			entityName.text = entry.name;
 			entityPrice.text = entry.price + "$";
@@ -54,6 +55,7 @@ public class EndGameUI : MonoBehaviour {
 			lastScore += n * sign;
 			yield return longWait;
 		}
+        AudioManager.inst.stopSound(sound);
 	}
 
 	void OnEnable() {
