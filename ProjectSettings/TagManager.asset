@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Ground
   - SeaLevel
+  - Entiry
+  - Side
+  - Hook
   layers:
   - Default
   - TransparentFX

@@ -62,6 +62,17 @@ public class Hook : MonoBehaviour {
 		rope.SetPosition(0, _rigidbody.transform.position);
 	}
 
+	void OnCollisionEnter2D(Collision2D collision) {
+		if (collision.collider.CompareTag("Entiry")) {
+			Entiry entiry = collision.collider.GetComponent<Entiry>();
+			Assert.IsNotNull(entiry);
+			entiry.attachTo(_rigidbody);
+			if (_state == State.GoingDown) {
+				_state = State.GoingUp;
+			}
+		}
+	}
+
 	void OnTriggerEnter2D(Collider2D collision) {
 		if (_state == State.GoingDown && collision.CompareTag("Ground")) {
 			_state = State.GoingUp;
