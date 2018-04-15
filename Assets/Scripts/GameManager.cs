@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
     {
         TextMeshPro scoreText = Instantiate(scoreToAdd > 0 ? positiveScore : negativeScore);
         scoreText.transform.position = pos;
-        scoreText.text = (scoreToAdd > 0 ? "+" : "") + scoreToAdd + "$";
+        scoreText.text = "$" + (scoreToAdd > 0 ? "+" : "") + scoreToAdd;
 
         const float duration = 1;
         const float speed = 1.5f;

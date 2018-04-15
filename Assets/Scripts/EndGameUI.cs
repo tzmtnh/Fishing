@@ -27,7 +27,7 @@ public class EndGameUI : MonoBehaviour {
         AudioSource sound = AudioManager.inst.playSound("Machine_Gun", 0.5f, 1f, true);
 		foreach (GameManager.ScoreEntry entry in scoreEntries) {
 			entityName.text = entry.name;
-			entityPrice.text = entry.price + "$";
+			entityPrice.text = "$" + entry.price;
 			entityCount.text = entry.count.ToString();
 			entityImage.sprite = entry.sprite;
 
