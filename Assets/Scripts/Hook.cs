@@ -36,8 +36,17 @@ public class Hook : MonoBehaviour {
 	void onGameStateChanged(GameManager.GameState oldState, GameManager.GameState newState) {
 		if (newState == GameManager.GameState.Fishing) {
 			_state = State.GoingDown;
+            Invoke("playCastingLine", 0.2f);
+            Invoke("playHookEnterWater", 0.4f);
 		}
 	}
+
+    void playCastingLine() {
+        AudioManager.inst.playSound("Casting_Line");
+    }
+    void playHookEnterWater() {
+        AudioManager.inst.playSound("Hook_Enter_Water");
+    }
 
 	void Awake() {
 		Assert.IsNull(inst);
@@ -99,6 +108,8 @@ public class Hook : MonoBehaviour {
 
 			if (_state == State.GoingDown) {
 				_state = State.GoingUp;
+                AudioManager.inst.playSound("Reverse_SFX");
+                AudioManager.inst.playFishingMusic(true);
 			}
 		}
 	}

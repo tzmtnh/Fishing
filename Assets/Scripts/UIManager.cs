@@ -30,7 +30,7 @@ public class UIManager : MonoBehaviour {
 		}
 	}
 
-	public void onStartButtonPressed() {
+    public void onStartButtonPressed() {
 		GameManager.inst.changeState(GameManager.GameState.Fishing);
 	}
 

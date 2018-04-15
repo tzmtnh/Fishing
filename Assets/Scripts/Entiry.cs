@@ -25,9 +25,14 @@ public abstract class Entity : MonoBehaviour {
 	float _initMass;
 
 	public virtual void attachTo(Rigidbody2D rb, Collider2D c) {
-		if (_state != State.InWater) return;
-		_state = State.Attached;
-
+        if (_state != State.InWater) return;
+        _state = State.Attached;
+        // sfx
+        if (isGarbage) {
+            AudioManager.inst.playSound("Hooking_Garbage");
+        } else {
+            AudioManager.inst.playSound("Hooking_Fish");   
+        }
 		_rigidbody.mass = 0;
 		_rigidbody.angularVelocity = 0;
 
@@ -53,7 +58,7 @@ public abstract class Entity : MonoBehaviour {
         _rigidbody.AddTorque(UnityEngine.Random.Range(-200f, 200f));
 
 		_state = State.Flying;
-
+        AudioManager.inst.playSound("Leaving_Water");
     }
 
     void delayedLayerCollisions() {
@@ -73,7 +78,12 @@ public abstract class Entity : MonoBehaviour {
 
 	protected virtual void Update()
 	{
-		if (_state == State.Flying && _rigidbody.position.y < 0.5) {
+        if (_state == State.Flying && _rigidbody.position.y < 0.5) {
+            if (isGarbage) {
+                AudioManager.inst.playSound("Garbage_Enter_Water");
+            } else {
+                AudioManager.inst.playSound("Fish_Enter_Water");
+            }
 			TrashSpawner.inst.trashObjList.Remove(this);
 			Destroy(gameObject);
         }
@@ -88,6 +98,11 @@ public abstract class Entity : MonoBehaviour {
             if (ninjaHook.currentVelocity >= ninjaHook.minCutVelocity)
             {
                 Debug.Log("Hook velocity that killed me " + ninjaHook.currentVelocity);
+                if (isGarbage) {
+                    AudioManager.inst.playSound("Garbage_Slice");
+                } else {
+                    AudioManager.inst.playSound("Fish_Slice");
+                }
                 int score = price * (isGarbage ? 1 : -1);
                 GameManager.inst.addScore(this, score);
                 TrashSpawner.inst.trashObjList.Remove(this);

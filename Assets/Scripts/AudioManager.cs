@@ -6,13 +6,17 @@ using UnityEngine.Assertions;
 
 public class AudioManager : MonoBehaviour {
 
+    public float defaultMusicVolume = 0.3f;
+
 	[System.Serializable]
 	public class AudioElement {
 		public string name;
-		public float defaultVolume = 1;
-		public float defaultPitch = 1;
+		public float defaultVolume = 1.0f;
+		public float defaultPitch = 1.0f;
 		public AudioClip clip;
 	}
+
+    AudioSource musicPlaying;
 
 	public static AudioManager inst;
 
@@ -82,7 +86,7 @@ public class AudioManager : MonoBehaviour {
 	}
 
 	public void stopSound(AudioSource source) {
-		if (source.isPlaying == false)
+        if (source == null || source.isPlaying == false)
 			return;
 
 		Assert.IsTrue(_activeSources.Contains(source));
@@ -101,6 +105,7 @@ public class AudioManager : MonoBehaviour {
 		}
 	}
 
+
 	void Update() {
 		if (Time.timeScale == 0) return;
 
@@ -108,10 +113,43 @@ public class AudioManager : MonoBehaviour {
 		for (int i = _activeSources.Count - 1; i >= 0; i--) {
 			AudioSource source = _activeSources[i];
 			if (source.isPlaying == false) {
-				source.clip = null;
-				_freeSources.Push(source);
-				_activeSources.RemoveAt(i);
+                source.clip = null;
+                _freeSources.Push(source);
+                _activeSources.RemoveAt(i);
 			}
 		}
 	}
+
+    public void playThemeMusic() {
+        stopSound(musicPlaying);
+        musicPlaying = playSound("Boat_Theme_Intro", defaultMusicVolume, 1, false);
+        Invoke("playThemeMusicLoop", 3.95f);
+
+    }
+
+    public void playThemeMusicLoop()
+    {
+        if (GameManager.inst.state == GameManager.GameState.StartMenu ||
+            GameManager.inst.state == GameManager.GameState.EndGame)
+        {
+            stopSound(musicPlaying);
+            musicPlaying = playSound("Boat_Theme_Loop", defaultMusicVolume, 1, true);
+        }
+    }
+
+    public void playFishingMusic(bool reverse = false)
+    {
+        stopSound(musicPlaying);
+        if (reverse) {
+            musicPlaying = playSound("Fishing_Music_Reverse", defaultMusicVolume, 1, true); 
+        } else {
+            musicPlaying = playSound("Fishing_Music", defaultMusicVolume, 1, true);
+        }
+
+    }
+
+    public void playNinjaMusic() {
+        stopSound(musicPlaying);
+        musicPlaying = playSound("Ninja_Music", defaultMusicVolume, 1, true);
+    }
 }
