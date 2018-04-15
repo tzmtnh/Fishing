@@ -28,6 +28,7 @@ public abstract class Entity : MonoBehaviour {
 
 		WheelJoint2D joint = gameObject.AddComponent<WheelJoint2D>();
 		joint.connectedBody = rb;
+		joint.anchor = new Vector2(0, 0.1f);
 
 		_rigidbody.velocity = new Vector2();
 		_rigidbody.gravityScale = 1;
