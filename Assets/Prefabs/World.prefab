@@ -2114,6 +2114,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+  spin: 0
 --- !u!114 &114375249039529068
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2375,6 +2376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numEntities: 40
+  densityMultiplier: 1
   depthRange: {x: 0.91, y: -66.28}
   entityPrefabs:
   - {fileID: 114420137010470324, guid: 41324e97e2f62c44d86efb24536a575f, type: 2}

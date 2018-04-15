@@ -97,37 +97,32 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 0
+      value: 0.0016937256
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     - serializedVersion: 2
-      time: 0.21199436
-      value: 0
+      time: 0.031222556
+      value: 0.0016937256
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     - serializedVersion: 2
-      time: 0.6765382
-      value: 0.59097093
-      inSlope: -0.19012351
-      outSlope: -0.19012351
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 0.9567746
-      value: 0
-      inSlope: 0
-      outSlope: 0
+      time: 0.37764335
+      value: 0.37815148
+      inSlope: 0.11499656
+      outSlope: 0.11499656
       tangentMode: 0
     - serializedVersion: 2
       time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
+      value: 0.0016937256
+      inSlope: -1.3970767
+      outSlope: -1.3970767
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+  spin: 1
 --- !u!212 &212227910971252606
 SpriteRenderer:
   m_ObjectHideFlags: 1

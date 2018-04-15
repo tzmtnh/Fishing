@@ -108,16 +108,10 @@ MonoBehaviour:
       outSlope: 0
       tangentMode: 0
     - serializedVersion: 2
-      time: 0.3754911
-      value: 0.76916784
-      inSlope: -0.19012351
-      outSlope: -0.19012351
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 0.7387949
-      value: 0
-      inSlope: 0
-      outSlope: 0
+      time: 0.4953031
+      value: 0.71266454
+      inSlope: 0.26237917
+      outSlope: 0.26237917
       tangentMode: 0
     - serializedVersion: 2
       time: 1
@@ -128,6 +122,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+  spin: 1
 --- !u!212 &212987820020027886
 SpriteRenderer:
   m_ObjectHideFlags: 1
