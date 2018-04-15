@@ -120,11 +120,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114862571702011354, guid: 0754608039ff4dd44a825c670b245688,
-        type: 2}
-      propertyPath: entityPrefabs.Array.size
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4001036202887016, guid: 0754608039ff4dd44a825c670b245688, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -156,72 +151,6 @@ Prefab:
     - target: {fileID: 4001036202887016, guid: 0754608039ff4dd44a825c670b245688, type: 2}
       propertyPath: m_RootOrder
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114862571702011354, guid: 0754608039ff4dd44a825c670b245688,
-        type: 2}
-      propertyPath: entityPrefabs.Array.data[1]
-      value: 
-      objectReference: {fileID: 114681421134723068, guid: ac106e6dfed282a4684fe7a81234df08,
-        type: 2}
-    - target: {fileID: 4257854141832990, guid: 0754608039ff4dd44a825c670b245688, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 212507974731909248, guid: 0754608039ff4dd44a825c670b245688,
-        type: 2}
-      propertyPath: m_SortingOrder
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4190466451533902, guid: 0754608039ff4dd44a825c670b245688, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 212179240738048084, guid: 0754608039ff4dd44a825c670b245688,
-        type: 2}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114862571702011354, guid: 0754608039ff4dd44a825c670b245688,
-        type: 2}
-      propertyPath: depthRange.x
-      value: -2.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114862571702011354, guid: 0754608039ff4dd44a825c670b245688,
-        type: 2}
-      propertyPath: depthRange.y
-      value: -66.28
-      objectReference: {fileID: 0}
-    - target: {fileID: 114862571702011354, guid: 0754608039ff4dd44a825c670b245688,
-        type: 2}
-      propertyPath: entityPrefabs.Array.data[0]
-      value: 
-      objectReference: {fileID: 114054355783132234, guid: de6846b8f76c4bf4e9467a90ab678e85,
-        type: 2}
-    - target: {fileID: 4309741883469054, guid: 0754608039ff4dd44a825c670b245688, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 2.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 212507974731909248, guid: 0754608039ff4dd44a825c670b245688,
-        type: 2}
-      propertyPath: m_FlipX
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1770477899526760, guid: 0754608039ff4dd44a825c670b245688, type: 2}
-      propertyPath: m_TagString
-      value: Side
-      objectReference: {fileID: 0}
-    - target: {fileID: 1244493689151352, guid: 0754608039ff4dd44a825c670b245688, type: 2}
-      propertyPath: m_TagString
-      value: Side
-      objectReference: {fileID: 0}
-    - target: {fileID: 1645329553670562, guid: 0754608039ff4dd44a825c670b245688, type: 2}
-      propertyPath: m_TagString
-      value: Hook
-      objectReference: {fileID: 0}
-    - target: {fileID: 114862571702011354, guid: 0754608039ff4dd44a825c670b245688,
-        type: 2}
-      propertyPath: numEntities
-      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0754608039ff4dd44a825c670b245688, type: 2}

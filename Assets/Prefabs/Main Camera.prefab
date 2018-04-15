@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff5d00b69f43c3d44870e044da155a0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minHookY: -1
+  hookBoarderY: -1
 --- !u!124 &124375761429533140
 Behaviour:
   m_ObjectHideFlags: 1
