@@ -975,7 +975,7 @@ MonoBehaviour:
   - name: Machine_Gun
     defaultVolume: 0.5
     defaultPitch: 1
-    clip: {fileID: 8300000, guid: 94c56872212604211a65b1b65ade3a0e, type: 3}
+    clip: {fileID: 8300000, guid: 90c3793c89dbe4f44be2392383bb575f, type: 3}
 --- !u!114 &114340645495134058
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -987,7 +987,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09f28e3d0863168459845ba0aa378005, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 3
+  state: 1
   score: 0
   positiveScore: {fileID: 114202194594855302, guid: 76ed2bd36304ef646a0c058fa41a6029,
     type: 2}

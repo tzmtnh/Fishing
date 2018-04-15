@@ -78,7 +78,8 @@ public abstract class Entity : MonoBehaviour {
 
 	protected virtual void Update()
 	{
-        if (_state == State.Flying && _rigidbody.position.y < 0.5) {
+
+        if (_state == State.Flying && _rigidbody.position.y < 0.6) {
             if (isGarbage) {
                 AudioManager.inst.playSound("Garbage_Enter_Water");
             } else {
