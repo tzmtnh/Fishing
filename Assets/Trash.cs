@@ -9,6 +9,7 @@ public class Trash : MonoBehaviour {
 	void Start () {
         rb = GetComponent<Rigidbody2D>();
         rb.AddForce(transform.up * startForce, ForceMode2D.Impulse);
+        rb.AddTorque(Random.Range(-200f, 200f));
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
@@ -21,6 +22,8 @@ public class Trash : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-        
+        if (rb.position.y < 2) {
+            Destroy(gameObject);
+        }
 	}
 }
