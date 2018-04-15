@@ -13,18 +13,18 @@ public class GameManager : MonoBehaviour {
 
 	public GameState state;
 
-	public void changeState(GameState newState) {
-		if (newState == state) return;
+	public void changeState(GameState newState, bool forceUpdate = false) {
+		if (newState == state && forceUpdate == false) return;
 		GameState oldState = state;
 		state = newState;
 		if (onGameStateChanged != null) {
 			onGameStateChanged(oldState, newState);
 		}
-		Debug.LogFormat("*** Changing state from {0} to {1}", oldState, newState);
 	}
 
 	void Awake() {
 		Assert.IsNull(inst);
 		inst = this;
+		changeState(GameState.StartMenu, true);
 	}
 }
