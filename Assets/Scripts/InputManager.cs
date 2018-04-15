@@ -7,11 +7,10 @@ public class InputManager : MonoBehaviour {
 
 	public static InputManager inst;
 
-	public bool left;
-	public bool right;
+	public float horizontal;
 	public bool click;
 
-	Quaternion _initAttitude = Quaternion.identity;
+	Quaternion _initAttitudeInv = Quaternion.identity;
 
 	void Awake () {
 		Assert.IsNull(inst);
@@ -21,16 +20,17 @@ public class InputManager : MonoBehaviour {
 	IEnumerator Start() {
 		if (Application.platform == RuntimePlatform.Android) {
 			Input.gyro.enabled = true;
+			Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
 			yield return null;
-			_initAttitude = Input.gyro.attitude;
+			_initAttitudeInv = Quaternion.Inverse(Input.gyro.attitude);
 		}
 	}
 
 	float _angle;
+	Vector3 _angles;
 	void Update () {
-		left = false;
-		right = false;
+		horizontal = 0;
 		click = false;
 
 		if (Application.platform == RuntimePlatform.Android) {
@@ -41,27 +41,22 @@ public class InputManager : MonoBehaviour {
 				}
 			}
 
-			Quaternion attitude = Input.gyro.attitude * _initAttitude;
-			Vector3 up1 = _initAttitude * Vector3.forward;
-			Vector3 forward = _initAttitude * Vector3.up;
-			Vector3 up2 = Vector3.ProjectOnPlane(attitude * Vector3.forward, forward).normalized;
-			_angle = Vector3.Angle(up1, up2);
-
-			//_angle = attitude.eulerAngles.y - 180f;
-			//_angle = (180f - Mathf.Abs(_angle)) * Mathf.Sign(_angle);
+			Quaternion attitude = _initAttitudeInv * Input.gyro.attitude;
+			_angles = attitude.eulerAngles;
+			_angle = attitude.eulerAngles.z - 180f;
+			_angle = (180f - Mathf.Abs(_angle)) * Mathf.Sign(_angle);
 			const float thresh = 10;
 			if (Mathf.Abs(_angle) > thresh) {
-				left = _angle < 0;
-				right = _angle > 0;
+				horizontal = _angle / 20f;
 			}
 
 		} else {
 			if (Input.GetKey(KeyCode.LeftArrow)) {
-				left = true;
+				horizontal = -1;
 			}
 
-			if (Input.GetKey(KeyCode.LeftArrow)) {
-				right = true;
+			if (Input.GetKey(KeyCode.RightArrow)) {
+				horizontal = 1;
 			}
 
 			if (Input.GetKeyDown(KeyCode.Space)) {
@@ -71,6 +66,9 @@ public class InputManager : MonoBehaviour {
 	}
 
 	void OnGUI() {
-		GUI.Label(new Rect(100, 100, 200, 100), "" + _angle);
+		GUIStyle style = new GUIStyle();
+		style.fontSize = 40;
+		GUI.Label(new Rect(100, 100, 200, 100), "" + _angles, style);
+		GUI.Label(new Rect(100, 200, 200, 100), "" + _angle, style);
 	}
 }

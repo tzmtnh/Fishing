@@ -22,11 +22,9 @@ public class Hook : MonoBehaviour {
 	}
 
 	void updateLeftRight() {
-		if (InputManager.inst.left) {
-			_rigidbody.AddForce(new Vector2(-reactionSpeed, 0));
-		} else if (InputManager.inst.right) {
-			_rigidbody.AddForce(new Vector2(reactionSpeed, 0));
-		}
+		float horizontal = InputManager.inst.horizontal;
+		if (Mathf.Approximately(horizontal, 0)) return;
+		_rigidbody.AddForce(new Vector2(horizontal * reactionSpeed, 0));
 	}
 
 	void Awake() {
