@@ -6,7 +6,7 @@ using System;
 public abstract class Entity : MonoBehaviour {
 
 	public int price = 10;
-    public float startForce = 10f;
+    public float startForce = 1600f;
 	public AnimationCurve probabilityByDepth = new AnimationCurve();
 
 	bool _isGarbage;
@@ -42,10 +42,13 @@ public abstract class Entity : MonoBehaviour {
     public void detachAndLaunch() {
         _rigidbody.mass = _initMass;
         _joint.enabled = false;
+        _rigidbody.drag = 0.25f;
+        _rigidbody.gravityScale = 0.25f;
         _rigidbody.AddForce(transform.up *
-                            UnityEngine.Random.Range(0.7f, 1.3f) * startForce,
+                            UnityEngine.Random.Range(0.7f, 1.3f) * startForce * _initMass,
                             ForceMode2D.Impulse);
         _rigidbody.AddTorque(UnityEngine.Random.Range(-200f, 200f));
+
         _attached = false;
         _flying = true;
 
@@ -71,4 +74,6 @@ public abstract class Entity : MonoBehaviour {
             Destroy(gameObject);
         }
 	}
+
+
 }

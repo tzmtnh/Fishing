@@ -18,4 +18,12 @@ public class Garbage : Entity {
 		base.attachTo(rb, c);
 		_rigidbody.angularDrag = _angularDrag;
 	}
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("NinjaHook"))
+        {
+            Destroy(gameObject);
+        }
+    }
 }

@@ -23,10 +23,10 @@ public class Fish : Entity {
 		_sprite.flipX = _dir > 0;
 	}
 
-	private void OnCollisionEnter2D(Collision2D collision) {
-		if (collision.collider.CompareTag("Side")) {
+    private void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.collider.CompareTag("Side")) {
 			_dir = -_dir;
-        } else if (collision.collider.CompareTag( "NinjaHook")) {
+        }  else if (collision.collider.CompareTag( "NinjaHook")) {
             Destroy(gameObject);
         }
 	}
