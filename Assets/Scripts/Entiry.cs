@@ -23,7 +23,7 @@ public abstract class Entity : MonoBehaviour {
     protected bool _flying = false;
 	float _initMass;
 
-	public void attachTo(Rigidbody2D rb, Collider2D c) {
+	public virtual void attachTo(Rigidbody2D rb, Collider2D c) {
 		if (_attached) return;
 		_attached = true;
 		_rigidbody.mass = 0;
