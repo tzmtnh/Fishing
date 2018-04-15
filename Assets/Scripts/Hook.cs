@@ -59,7 +59,7 @@ public class Hook : MonoBehaviour {
 		rope.SetPosition(0, _rigidbody.transform.position);
 		rope.SetPosition(1, rob.position);
 
-		GameManager.onGameStateChanged += onGameStateChanged;
+		GameManager.inst.onGameStateChanged += onGameStateChanged;
 	}
 
 	void FixedUpdate() {
@@ -108,9 +108,9 @@ public class Hook : MonoBehaviour {
 			attachedEntities.Add(entiry);
 
 			if (_state == State.GoingDown) {
-				_state = State.GoingUp;
                 AudioManager.inst.playSound("Reverse_SFX");
                 AudioManager.inst.playFishingMusic(true);
+				_state = State.GoingUp;
 			}
 		}
 	}

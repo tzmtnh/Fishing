@@ -38,10 +38,15 @@ public class UIManager : MonoBehaviour {
 		Assert.IsNull(inst);
 		inst = this;
 
-		GameManager.onGameStateChanged += onGameStateChanged;
+		
 
 		_menues = new GameObject[2];
 		_menues[0] = startMenu;
 		_menues[1] = endGameMenu;
+	}
+
+	private void Start()
+	{
+        GameManager.inst.onGameStateChanged += onGameStateChanged;
 	}
 }

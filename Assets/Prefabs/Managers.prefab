@@ -910,7 +910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 415afa948a92e754e8a3b8166b76a8bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultMusicVolume: 0.2
+  defaultMusicVolume: 0.3
   audioElements:
   - name: Boat_Theme_Loop
     defaultVolume: 1

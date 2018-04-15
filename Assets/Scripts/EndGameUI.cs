@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class EndGameUI : MonoBehaviour {
 
@@ -48,7 +49,7 @@ public class EndGameUI : MonoBehaviour {
 				i += step;
 				step++;
 				int newScore = lastScore + Mathf.Min(i, n) * sign;
-				scoreText.text = newScore + "$";
+				scoreText.text = "$" + newScore;
 				yield return shortWait;
 			}
 
@@ -56,6 +57,10 @@ public class EndGameUI : MonoBehaviour {
 			yield return longWait;
 		}
         AudioManager.inst.stopSound(sound);
+
+        // restart
+        yield return new WaitForSeconds(5.0f);  // or however long you want it to wait
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 	}
 
 	void OnEnable() {
