@@ -53,6 +53,7 @@ public class CameraController : MonoBehaviour {
 	void Start () {
 		_pos = transform.position;
         target = _pos;
+        _initial_pos = _pos;
 	}
 
 	Vector3 _velocity;

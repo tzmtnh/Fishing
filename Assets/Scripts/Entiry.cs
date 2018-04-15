@@ -18,7 +18,7 @@ public abstract class Entity : MonoBehaviour {
 	protected Rigidbody2D _rigidbody;
 	protected SpriteRenderer _sprite;
 	protected Collider2D _collider;
-
+    protected WheelJoint2D _joint;
 	protected bool _attached = false;
     protected bool _flying = false;
 	float _initMass;
@@ -29,9 +29,9 @@ public abstract class Entity : MonoBehaviour {
 		_rigidbody.mass = 0;
 		_rigidbody.angularVelocity = 0;
 
-		WheelJoint2D joint = gameObject.AddComponent<WheelJoint2D>();
-		joint.connectedBody = rb;
-		joint.anchor = new Vector2(0, 0.1f);
+		_joint = gameObject.AddComponent<WheelJoint2D>();
+		_joint.connectedBody = rb;
+		_joint.anchor = new Vector2(0, 0.1f);
 
 		_rigidbody.velocity = new Vector2();
 		_rigidbody.gravityScale = 1;
@@ -41,6 +41,7 @@ public abstract class Entity : MonoBehaviour {
 
     public void detachAndLaunch() {
         _rigidbody.mass = _initMass;
+        _joint.enabled = false;
         _rigidbody.AddForce(transform.up *
                             UnityEngine.Random.Range(0.7f, 1.3f) * startForce,
                             ForceMode2D.Impulse);
@@ -66,7 +67,7 @@ public abstract class Entity : MonoBehaviour {
 
 	private void Update()
 	{
-        if (_flying && _rigidbody.position.y < 0) {
+        if (_flying && _rigidbody.position.y < 0.5) {
             Destroy(gameObject);
         }
 	}

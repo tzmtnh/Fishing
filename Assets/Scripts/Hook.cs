@@ -9,7 +9,9 @@ public class Hook : MonoBehaviour {
 
 	public static Hook inst;
 
-	public float reactionSpeed = 20;
+	public float reactionSpeed = 20f;
+
+    public float recenteringSpeedModifier = 2f;
 
 	public LineRenderer rope;
 
@@ -63,7 +65,9 @@ public class Hook : MonoBehaviour {
 				Debug.LogError("Unhandled Rob State");
 				break;
 		}
-
+        Vector2 pos = _rigidbody.position;
+        pos.x = 0.43f;
+        _rigidbody.AddForce((pos - _rigidbody.position) * recenteringSpeedModifier);
 		_rigidbody.angularVelocity = 0;
 		_rigidbody.rotation = 0;
 	}

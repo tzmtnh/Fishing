@@ -29,19 +29,13 @@ public class TrashSpawner : MonoBehaviour {
             return;
         }
 
-        for (int i = 0; i < maxSpawns; i++) {
+        foreach (Entity attachedEntity in Hook.inst.attachedEntities) {
             Transform spawnPoint = Hook.inst.rigid.transform;
             Quaternion tmp = spawnPoint.rotation;
             tmp.z += Random.Range(-0.025f, 0.025f);
             spawnPoint.rotation = tmp;
-            Entity spawnedTrash = Instantiate(trashPrefab, spawnPoint.position, spawnPoint.rotation);
-                //rb = spawnedTrash.GetComponent<Rigidbody2D>();
-                //rb.AddForce(transform.up * startForce, ForceMode2D.Impulse);
-                //rb.AddTorque(Random.Range(-200f, 200f));
-                //spawnedTrash._attached = false;
-                //spawnedTrash._flying = true;
-            spawnedTrash.detachAndLaunch();
-            trashObjList.Add(spawnedTrash);
+            attachedEntity.detachAndLaunch();
+            trashObjList.Add(attachedEntity);
             //Destroy(spawnedTrash, 5f);
         }
     }
