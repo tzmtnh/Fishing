@@ -17,14 +17,14 @@ public class Hook : MonoBehaviour {
 	Collider2D _collider;
 
 	Rigidbody2D _rigidbody;
-	public Rigidbody2D rigidbody {
+	public Rigidbody2D rigid {
 		get { return _rigidbody; }
 	}
 
 	void updateLeftRight() {
-		if (Input.GetKey(KeyCode.LeftArrow)) {
+		if (InputManager.inst.left) {
 			_rigidbody.AddForce(new Vector2(-reactionSpeed, 0));
-		} else if (Input.GetKey(KeyCode.RightArrow)) {
+		} else if (InputManager.inst.right) {
 			_rigidbody.AddForce(new Vector2(reactionSpeed, 0));
 		}
 	}
@@ -43,7 +43,7 @@ public class Hook : MonoBehaviour {
 		switch (_state) {
 			case State.Idle:
 				_rigidbody.gravityScale = 0;
-				if (Input.GetKeyDown(KeyCode.Space)) {
+				if (InputManager.inst.click) {
 					_state = State.GoingDown;
 				}
 				break;

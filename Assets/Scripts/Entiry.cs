@@ -23,6 +23,7 @@ public class Entiry : MonoBehaviour {
 		joint.connectedBody = rb;
 		_rigidbody.velocity = new Vector2();
 		_rigidbody.angularVelocity = 0;
+		_rigidbody.gravityScale = 1;
 
 		Physics2D.IgnoreCollision(_collider, c, true);
 	}
