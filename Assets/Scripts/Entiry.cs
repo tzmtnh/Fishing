@@ -44,8 +44,7 @@ public abstract class Entity : MonoBehaviour {
         _joint.enabled = false;
         _rigidbody.drag = 0.25f;
         _rigidbody.gravityScale = 0.25f;
-        LayerMask layer = LayerMask.NameToLayer("Entities");
-        Physics2D.IgnoreLayerCollision(layer, layer, false);
+        Invoke("delayedLayerCollisions", UnityEngine.Random.Range(1.0f, 2.0f));
         _rigidbody.AddForce(transform.up *
                             UnityEngine.Random.Range(0.7f, 1.3f) * startForce * _initMass,
                             ForceMode2D.Impulse);
@@ -54,6 +53,11 @@ public abstract class Entity : MonoBehaviour {
         _attached = false;
         _flying = true;
 
+    }
+
+    void delayedLayerCollisions() {
+        LayerMask layer = LayerMask.NameToLayer("Entities");
+        Physics2D.IgnoreLayerCollision(layer, layer, false);  
     }
 
 	void Awake() {
