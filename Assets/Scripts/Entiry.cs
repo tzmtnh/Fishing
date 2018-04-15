@@ -5,6 +5,8 @@ using System;
 
 public abstract class Entity : MonoBehaviour {
 
+	protected enum State { InWater, Attached, Flying }
+
 	public int population = 10;
 	public int price = 10;
     public float startForce = 1600f;
@@ -13,24 +15,24 @@ public abstract class Entity : MonoBehaviour {
 	public bool isGarbage { get { return GetType() == typeof(Garbage); } }
 	public bool isFish { get { return GetType() == typeof(Fish); } }
 
+	public Sprite sprite { get { return _sprite.sprite; } }
+
 	protected Rigidbody2D _rigidbody;
 	protected SpriteRenderer _sprite;
 	protected Collider2D _collider;
     protected WheelJoint2D _joint;
-	protected bool _attached = false;
-    protected bool _flying = false;
+	protected State _state = State.InWater;
 	float _initMass;
 
 	public virtual void attachTo(Rigidbody2D rb, Collider2D c) {
-		if (_attached) return;
+        if (_state != State.InWater) return;
+        _state = State.Attached;
         // sfx
         if (isGarbage) {
             AudioManager.inst.playSound("Hooking_Garbage");
         } else {
             AudioManager.inst.playSound("Hooking_Fish");   
         }
-
-		_attached = true;
 		_rigidbody.mass = 0;
 		_rigidbody.angularVelocity = 0;
 
@@ -55,10 +57,8 @@ public abstract class Entity : MonoBehaviour {
                             ForceMode2D.Impulse);
         _rigidbody.AddTorque(UnityEngine.Random.Range(-200f, 200f));
 
-        _attached = false;
-        _flying = true;
+		_state = State.Flying;
         AudioManager.inst.playSound("Leaving_Water");
-
     }
 
     void delayedLayerCollisions() {
@@ -78,7 +78,7 @@ public abstract class Entity : MonoBehaviour {
 
 	protected virtual void Update()
 	{
-		if (_flying && _rigidbody.position.y < 0.5) {
+        if (_state == State.Flying && _rigidbody.position.y < 0.5) {
             if (isGarbage) {
                 AudioManager.inst.playSound("Garbage_Enter_Water");
             } else {
@@ -104,7 +104,7 @@ public abstract class Entity : MonoBehaviour {
                     AudioManager.inst.playSound("Fish_Slice");
                 }
                 int score = price * (isGarbage ? 1 : -1);
-                GameManager.inst.addScore(score, transform.position);
+                GameManager.inst.addScore(this, score);
                 TrashSpawner.inst.trashObjList.Remove(this);
                 Destroy(gameObject);
                 return;

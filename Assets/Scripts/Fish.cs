@@ -25,22 +25,22 @@ public class Fish : Entity {
 	}
 
 	void FixedUpdate() {
-        if (_attached == false && _flying == false) {
+        if (_state == State.InWater) {
 			_rigidbody.AddForce(new Vector2(_dir * speed, 0));
 		}
 	}
 
 	protected override void Update() {
 		base.Update();
-		if (_attached) return;
+		if (_state != State.InWater) return;
 		_sprite.flipX = _dir > 0;
 	}
 
     protected override void onCollisionEnter2D(Collision2D collision) {
-        if (GameManager.inst.state == GameManager.GameState.Fishing &&
+		if (_state == State.InWater &&
             collision.collider.CompareTag("Side")) {
 			_dir = -_dir;
-        } else if (GameManager.inst.state == GameManager.GameState.Ninja && 
+        } else if (_state == State.Flying && 
                    collision.collider.CompareTag("NinjaHook")) {
             NinjaHook ninjaHook = collision.collider.transform.GetComponent<NinjaHook>();
             Debug.Log("Ninja fish collision!");
@@ -48,11 +48,10 @@ public class Fish : Entity {
             {
                 Debug.Log("Hook velocity that released me (Turtle)" + ninjaHook.currentVelocity);
                 int score = 2 * price;
-                GameManager.inst.addScore(score, transform.position);
+                GameManager.inst.addScore(this, score);
                 //TrashSpawner.inst.trashObjList.Remove(this);
                 _spriteRenderer.sprite = FREE_VERSION;
                 isTurtle = false; 
-
             }
         } 
 	}

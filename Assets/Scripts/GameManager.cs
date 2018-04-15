@@ -8,7 +8,15 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
 
-    public enum GameState { StartMenu, Fishing, Ninja, EndGame, Leaderboard }
+	public struct ScoreEntry {
+		public string name;
+		public int count;
+		public int price;
+		public int order;
+		public Sprite sprite;
+	}
+
+	public enum GameState { StartMenu, Fishing, Ninja, EndGame, Leaderboard }
 
     public static GameManager inst;
     public static event Action<GameState, GameState> onGameStateChanged;
@@ -18,6 +26,10 @@ public class GameManager : MonoBehaviour
 
     public TextMeshPro positiveScore;
     public TextMeshPro negativeScore;
+
+
+	[NonSerialized]
+	public Dictionary<string, ScoreEntry> scoreEntries = new Dictionary<string, ScoreEntry>(32);
 
     public void changeState(GameState newState, bool forceUpdate = false)
     {
@@ -41,12 +53,28 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
-
-        if (onGameStateChanged != null)
-        {
-            onGameStateChanged(oldState, newState);
-        }
     }
+	public void addScore(Entity entity, int scoreToAdd) {
+		score += scoreToAdd;
+
+		ScoreEntry scoreEntry;
+		if (scoreEntries.ContainsKey(entity.name)) {
+			scoreEntry = scoreEntries[entity.name];
+		} else {
+			scoreEntry = new ScoreEntry();
+			scoreEntry.name = entity.name;
+			scoreEntry.price = scoreToAdd;
+			scoreEntry.sprite = entity.sprite;
+			scoreEntry.order = entity.isGarbage ? entity.price : entity.price * 1000;
+			scoreEntries.Add(entity.name, scoreEntry);
+		}
+
+		scoreEntry.count++;
+		scoreEntries[entity.name] = scoreEntry;
+
+		StartCoroutine(animateScore(scoreToAdd, entity.transform.position));
+	}
+
 
     public void addScore(int scoreToAdd, Vector3 pos)
     {
