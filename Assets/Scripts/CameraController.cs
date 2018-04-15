@@ -10,6 +10,7 @@ public class CameraController : MonoBehaviour {
     public Vector3 target;
 
 	Vector3 _pos;
+    Vector3 _initial_pos;
 
 	void updateFishing() {
 		float deltaY = Hook.inst.transform.position.y - _pos.y;
@@ -23,13 +24,18 @@ public class CameraController : MonoBehaviour {
     void updateNinja() {
         // find lowest object
         float min_y = 1000;
+        bool all_null = true;
         TrashSpawner trashSpawner = TrashSpawner.trashSpawnerInstance;
-        foreach(Entity go in trashSpawner.trashObjList) {
-            if (go == null) {
+        foreach (Entity go in trashSpawner.trashObjList)
+        {
+            if (go == null)
+            {
                 continue;
             }
+            all_null = false;
             float curr_y = go.GetComponent<Rigidbody2D>().position.y;
-            if (curr_y < min_y) {
+            if (curr_y < min_y)
+            {
                 min_y = curr_y;
             }
         }
@@ -39,6 +45,8 @@ public class CameraController : MonoBehaviour {
             _pos.y = min_y + 1.5f;
             //transform.position = _pos;
             target = _pos;
+        } else if (all_null) {
+            target = _initial_pos;
         }
     }
 

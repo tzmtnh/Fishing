@@ -41,7 +41,9 @@ public abstract class Entity : MonoBehaviour {
 
     public void detachAndLaunch() {
         _rigidbody.mass = _initMass;
-        _rigidbody.AddForce(transform.up * startForce, ForceMode2D.Impulse);
+        _rigidbody.AddForce(transform.up *
+                            UnityEngine.Random.Range(0.7f, 1.3f) * startForce,
+                            ForceMode2D.Impulse);
         _rigidbody.AddTorque(UnityEngine.Random.Range(-200f, 200f));
         _attached = false;
         _flying = true;
@@ -64,8 +66,8 @@ public abstract class Entity : MonoBehaviour {
 
 	private void Update()
 	{
-        //if (_flying && _rigidbody.position.y < 0) {
-        //    Destroy(gameObject);
-        //}
+        if (_flying && _rigidbody.position.y < 0) {
+            Destroy(gameObject);
+        }
 	}
 }
