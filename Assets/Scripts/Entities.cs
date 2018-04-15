@@ -10,7 +10,7 @@ public class Entities : MonoBehaviour {
 	public int numEntities = 100;
 	public Vector2 depthRange = new Vector2(-1, -80);
 
-	public Entiry[] entityPrefabs;
+	public Entity[] entityPrefabs;
 
 	void generateEntities() {
 		for (int i = 0; i < numEntities; i++) {
@@ -19,14 +19,14 @@ public class Entities : MonoBehaviour {
 			float x = Random.Range(-5f, 5f);
 
 			float totalWeight = 0;
-			foreach (Entiry ep in entityPrefabs) {
+			foreach (Entity ep in entityPrefabs) {
 				totalWeight += ep.probabilityByDepth.Evaluate(depthParam);
 			}
 
 			float r = Random.value;
-			Entiry prefab = null;
+			Entity prefab = null;
 			float currentWeight = 0f;
-			foreach (Entiry ep in entityPrefabs) {
+			foreach (Entity ep in entityPrefabs) {
 				float w = ep.probabilityByDepth.Evaluate(depthParam);
 				currentWeight += w;
 				if (currentWeight / totalWeight >= r) {
@@ -36,7 +36,7 @@ public class Entities : MonoBehaviour {
 			}
 
 			if (prefab == null) continue;
-			Entiry entity = Instantiate(prefab, transform);
+			Entity entity = Instantiate(prefab, transform);
 			entity.transform.position = new Vector3(x, y, 0);
 		}
 	}

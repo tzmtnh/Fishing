@@ -26,14 +26,8 @@ public class TrashSpawner : MonoBehaviour {
 
     void _start(GameManager.GameState old, GameManager.GameState current) {
         if (current.Equals(GameManager.GameState.Ninja))
-        StartCoroutine(spawnTrash()); 
-    }
-    IEnumerator spawnTrash() {
+
         for (int i = 0; i < maxSpawns; i++) {
-            float delay = 0.05f;//Random.Range(minDelay, maxDelay);
-            Debug.Log(delay);
-            yield return new WaitForSeconds(delay);
-            //yield return true;    
             int spawnIndex = Random.Range(0, spawnPoints.Length);
             Transform spawnPoint = spawnPoints[spawnIndex];
             Quaternion tmp = spawnPoint.rotation;

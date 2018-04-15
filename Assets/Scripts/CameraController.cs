@@ -46,7 +46,8 @@ public class CameraController : MonoBehaviour {
 		_pos = transform.position;
         target = _pos;
 	}
-	
+
+	Vector3 _velocity;
 	void Update () {
 		switch (GameManager.inst.state) {
 			case GameManager.GameState.StartMenu:
@@ -65,12 +66,9 @@ public class CameraController : MonoBehaviour {
 				Debug.LogError("Unhandled Game State");
 				break;
 		}
-	}
 
-	private void FixedUpdate()
-	{
-        Vector3 desiredPosition = target + offset;
-        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
-        transform.position = smoothedPosition;
+		Vector3 desiredPosition = target + offset;
+		Vector3 smoothedPosition = Vector3.SmoothDamp(transform.position, desiredPosition, ref _velocity, smoothSpeed);
+		transform.position = smoothedPosition;
 	}
 }

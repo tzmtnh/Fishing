@@ -68,7 +68,7 @@ public class Hook : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D collision) {
 		if (collision.collider.CompareTag("Entiry")) {
-			Entiry entiry = collision.collider.GetComponent<Entiry>();
+			Entity entiry = collision.collider.GetComponent<Entity>();
 			Assert.IsNotNull(entiry);
 			entiry.attachTo(_rigidbody, _collider);
 			if (_state == State.GoingDown) {

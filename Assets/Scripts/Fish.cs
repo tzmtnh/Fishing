@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fish : Entiry {
+public class Fish : Entity {
 
 	public float speed = 1;
 

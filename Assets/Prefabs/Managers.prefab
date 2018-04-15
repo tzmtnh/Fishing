@@ -122,6 +122,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a2a5128ca1ce7a47a3ae5447d18372b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  left: 0
-  right: 0
+  horizontal: 0
   click: 0
