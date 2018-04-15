@@ -122,6 +122,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+  FREE_VERSION: {fileID: 21300000, guid: 2d6d093d45b800b49b80d6ce6b37fdf3, type: 3}
   speed: 1
 --- !u!212 &212790903472670182
 SpriteRenderer:

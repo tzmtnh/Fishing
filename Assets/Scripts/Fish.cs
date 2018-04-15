@@ -47,7 +47,7 @@ public class Fish : Entity {
             if (isTurtle && ninjaHook.currentVelocity < ninjaHook.gentleCutThreshold)
             {
                 Debug.Log("Hook velocity that released me (Turtle)" + ninjaHook.currentVelocity);
-                int score = price;
+                int score = 2 * price;
                 GameManager.inst.addScore(score, transform.position);
                 //TrashSpawner.inst.trashObjList.Remove(this);
                 _spriteRenderer.sprite = FREE_VERSION;
