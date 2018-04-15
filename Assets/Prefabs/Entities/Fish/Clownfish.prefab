@@ -89,6 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc3e2d65c03111b4d860a72a59adf17f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  population: 10
   price: 5
   startForce: 10
   probabilityByDepth:
@@ -97,23 +98,17 @@ MonoBehaviour:
     - serializedVersion: 2
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: 4.3317366
+      outSlope: 4.3317366
       tangentMode: 0
     - serializedVersion: 2
-      time: 0.08
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 0.30752614
+      time: 0.38912433
       value: 0.8017818
       inSlope: -0.19012351
       outSlope: -0.19012351
       tangentMode: 0
     - serializedVersion: 2
-      time: 0.6
+      time: 0.9249832
       value: 0
       inSlope: 0
       outSlope: 0

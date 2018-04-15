@@ -6,39 +6,43 @@ using UnityEngine.Assertions;
 public class Entities : MonoBehaviour {
 
 	public static Entities inst;
-    public bool isFlying = false;
 
 	public int numEntities = 100;
 	public Vector2 depthRange = new Vector2(-1, -80);
 
 	public Entity[] entityPrefabs;
 
+	float getRandomValueByDistribution(AnimationCurve distributionCurve) {
+		const int subdivitions = 100;
+		float total = 0;
+		for (int i = 0; i < subdivitions; i++) {
+			float t = i / (subdivitions - 1f);
+			total += distributionCurve.Evaluate(t);
+		}
+
+		float r = Random.value;
+		float current = 0;
+		for (int i = 0; i < subdivitions; i++) {
+			float t = i / (subdivitions - 1f);
+			current += distributionCurve.Evaluate(t);
+			if (current / total >= r) {
+				return t;
+			}
+		}
+		return 1;
+	}
+
 	void generateEntities() {
-		for (int i = 0; i < numEntities; i++) {
-			float depthParam = i / (numEntities - 1f);
-			float y = Mathf.Lerp(depthRange.x, depthRange.y, depthParam);
-			float x = Random.Range(-3f, 3f);
+		foreach (Entity prefab in entityPrefabs) {
+			for (int i = 0; i < prefab.population; i++) {
+				float r = getRandomValueByDistribution(prefab.probabilityByDepth);
+				float y = Mathf.Lerp(depthRange.x, depthRange.y, r);
+				float w = prefab.isGarbage ? 4f : 1f;
+				float x = Random.Range(-1f, 1f) * w;
 
-			float totalWeight = 0;
-			foreach (Entity ep in entityPrefabs) {
-				totalWeight += ep.probabilityByDepth.Evaluate(depthParam);
+				Entity entity = Instantiate(prefab, transform);
+				entity.transform.position = new Vector3(x, y, 0);
 			}
-
-			float r = Random.value;
-			Entity prefab = null;
-			float currentWeight = 0f;
-			foreach (Entity ep in entityPrefabs) {
-				float w = ep.probabilityByDepth.Evaluate(depthParam);
-				currentWeight += w;
-				if (currentWeight / totalWeight >= r) {
-					prefab = ep;
-					break;
-				}
-			}
-
-			if (prefab == null) continue;
-			Entity entity = Instantiate(prefab, transform);
-			entity.transform.position = new Vector3(x, y, 0);
 		}
 	}
 

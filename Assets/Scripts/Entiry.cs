@@ -5,15 +5,13 @@ using System;
 
 public abstract class Entity : MonoBehaviour {
 
+	public int population = 10;
 	public int price = 10;
     public float startForce = 1600f;
 	public AnimationCurve probabilityByDepth = new AnimationCurve();
 
-	bool _isGarbage;
-	public bool isGarbage { get { return _isGarbage; } }
-
-	bool _isFish;
-	public bool isFish { get { return _isFish; } }
+	public bool isGarbage { get { return GetType() == typeof(Garbage); } }
+	public bool isFish { get { return GetType() == typeof(Fish); } }
 
 	protected Rigidbody2D _rigidbody;
 	protected SpriteRenderer _sprite;
@@ -65,10 +63,6 @@ public abstract class Entity : MonoBehaviour {
 		_sprite = GetComponent<SpriteRenderer>();
 		_rigidbody = GetComponent<Rigidbody2D>();
 		_initMass = _rigidbody.mass;
-
-		Type type = GetType();
-		_isGarbage = type == typeof(Garbage);
-		_isFish = type == typeof(Fish);
 
 		LayerMask layer = LayerMask.NameToLayer("Entities");
 		Physics2D.IgnoreLayerCollision(layer, layer, true);
