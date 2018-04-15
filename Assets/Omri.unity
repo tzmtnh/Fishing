@@ -253,16 +253,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114143902076143328, guid: ad0354f21b9954f568c48cc4c8bd8c01,
-        type: 2}
-      propertyPath: minCutVelocity
-      value: 0.008
-      objectReference: {fileID: 0}
-    - target: {fileID: 114143902076143328, guid: ad0354f21b9954f568c48cc4c8bd8c01,
-        type: 2}
-      propertyPath: gentleCutThreshold
-      value: 0.005
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ad0354f21b9954f568c48cc4c8bd8c01, type: 2}
   m_IsPrefabParent: 0
