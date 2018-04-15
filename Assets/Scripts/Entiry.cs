@@ -26,10 +26,10 @@ public abstract class Entity : MonoBehaviour {
 		_attached = true;
 		_rigidbody.mass = 0;
 
-		HingeJoint2D joint = gameObject.AddComponent<HingeJoint2D>();
+		WheelJoint2D joint = gameObject.AddComponent<WheelJoint2D>();
 		joint.connectedBody = rb;
+
 		_rigidbody.velocity = new Vector2();
-		_rigidbody.angularVelocity = 0;
 		_rigidbody.gravityScale = 1;
 
 		Physics2D.IgnoreCollision(_collider, c, true);

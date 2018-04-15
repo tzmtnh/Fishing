@@ -66,6 +66,7 @@ public class InputManager : MonoBehaviour {
 	}
 
 	void OnGUI() {
+		if (Application.platform != RuntimePlatform.Android) return;
 		GUIStyle style = new GUIStyle();
 		style.fontSize = 40;
 		GUI.Label(new Rect(100, 100, 200, 100), "" + _angles, style);

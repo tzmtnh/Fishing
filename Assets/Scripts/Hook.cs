@@ -60,6 +60,9 @@ public class Hook : MonoBehaviour {
 				Debug.LogError("Unhandled Rob State");
 				break;
 		}
+
+		_rigidbody.angularVelocity = 0;
+		_rigidbody.rotation = 0;
 	}
 
 	void Update() {
