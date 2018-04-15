@@ -1001,6 +1001,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reactionSpeed: 20
+  recenteringSpeedModifier: 2
   rope: {fileID: 120713602649819152}
 --- !u!114 &114862571702011354
 MonoBehaviour:
