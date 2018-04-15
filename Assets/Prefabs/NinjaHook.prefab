@@ -90,5 +90,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ninjaHookTrailPrefab: {fileID: 1830825712291940, guid: c1960df6e7e564cb6a8841f9078a690e,
     type: 2}
-  minCutVelocity: 0.005
+  minCutVelocity: 0.008
+  gentleCutThreshold: 0.005
+  currentVelocity: 0
   isCutting: 0
