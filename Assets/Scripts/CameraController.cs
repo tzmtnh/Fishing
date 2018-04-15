@@ -5,6 +5,9 @@ using UnityEngine;
 public class CameraController : MonoBehaviour {
 
 	public float hookBoarderY = -1;
+    public float smoothSpeed = 0.1f;
+    public Vector3 offset;
+    public Vector3 target;
 
 	Vector3 _pos;
 
@@ -12,12 +15,36 @@ public class CameraController : MonoBehaviour {
 		float deltaY = Hook.inst.transform.position.y - _pos.y;
 		if (Mathf.Abs(deltaY) > hookBoarderY) {
 			_pos.y += deltaY - hookBoarderY;
-			transform.position = _pos;
+            //transform.position = _pos;
+            target = _pos;
 		}
 	}
 
+    void updateNinja() {
+        // find lowest object
+        float min_y = 1000;
+        TrashSpawner trashSpawner = TrashSpawner.trashSpawnerInstance;
+        foreach(GameObject go in trashSpawner.trashObjList) {
+            if (go == null) {
+                continue;
+            }
+            float curr_y = go.GetComponent<Rigidbody2D>().position.y;
+            if (curr_y < min_y) {
+                min_y = curr_y;
+            }
+        }
+        if (min_y < 1000f && min_y > 4f)
+        {
+            Vector3 pos = transform.position;
+            _pos.y = min_y + 1.5f;
+            //transform.position = _pos;
+            target = _pos;
+        }
+    }
+
 	void Start () {
 		_pos = transform.position;
+        target = _pos;
 	}
 	
 	void Update () {
@@ -28,6 +55,7 @@ public class CameraController : MonoBehaviour {
 				updateFishing();
 				break;
 			case GameManager.GameState.Ninja:
+                updateNinja();
 				break;
 			case GameManager.GameState.EndGame:
 				break;
@@ -37,5 +65,12 @@ public class CameraController : MonoBehaviour {
 				Debug.LogError("Unhandled Game State");
 				break;
 		}
+	}
+
+	private void FixedUpdate()
+	{
+        Vector3 desiredPosition = target + offset;
+        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+        transform.position = smoothedPosition;
 	}
 }
