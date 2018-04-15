@@ -70,7 +70,7 @@ public class InputManager : MonoBehaviour {
 		}
 	}
 
-	
+	/*
 	void OnGUI() {
 		if (Application.platform != RuntimePlatform.Android) return;
 		GUIStyle style = new GUIStyle();
@@ -79,5 +79,5 @@ public class InputManager : MonoBehaviour {
 		//GUI.Label(new Rect(100, 200, 200, 100), "" + _angle, style);
 		GUI.Label(new Rect(100, 100, 200, 100), "" + debug, style);
 	}
-	
+	*/
 }
