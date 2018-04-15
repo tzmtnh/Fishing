@@ -32,6 +32,12 @@ public class Hook : MonoBehaviour {
 		_rigidbody.AddForce(new Vector2(horizontal * reactionSpeed, 0));
 	}
 
+	void onGameStateChanged(GameManager.GameState oldState, GameManager.GameState newState) {
+		if (newState == GameManager.GameState.Fishing) {
+			_state = State.GoingDown;
+		}
+	}
+
 	void Awake() {
 		Assert.IsNull(inst);
 		inst = this;
@@ -40,15 +46,14 @@ public class Hook : MonoBehaviour {
 		_collider = GetComponent<Collider2D>();
 
 		rope.SetPosition(0, _rigidbody.transform.position);
+
+		GameManager.onGameStateChanged += onGameStateChanged;
 	}
 
 	void FixedUpdate() {
 		switch (_state) {
 			case State.Idle:
 				_rigidbody.gravityScale = 0;
-				if (InputManager.inst.click) {
-					_state = State.GoingDown;
-				}
 				break;
 
 			case State.GoingDown:
