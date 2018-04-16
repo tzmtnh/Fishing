@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
         GameState oldState = state;
         state = newState;
 
+		//Debug.LogFormat("Game state changed from {0} to {1}", oldState, newState);
+
 		if (onGameStateChanged != null) {
 			onGameStateChanged(oldState, newState);
 		}

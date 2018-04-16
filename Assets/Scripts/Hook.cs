@@ -35,7 +35,6 @@ public class Hook : MonoBehaviour {
 
 	void onGameStateChanged(GameManager.GameState oldState, GameManager.GameState newState) {
 		if (newState == GameManager.GameState.Fishing) {
-			Debug.Log("onGameStateChanged");
 			_state = State.GoingDown;
             Invoke("playCastingLine", 0.2f);
             Invoke("playHookEnterWater", 0.4f);
@@ -53,12 +52,15 @@ public class Hook : MonoBehaviour {
 		Assert.IsNull(inst);
 		inst = this;
 
+		_state = State.Idle;
 		_rigidbody = GetComponent<Rigidbody2D>();
 		_collider = GetComponent<Collider2D>();
 
 		rope.SetPosition(0, _rigidbody.transform.position);
 		rope.SetPosition(1, rob.position);
+	}
 
+	void Start() {
 		GameManager.inst.onGameStateChanged += onGameStateChanged;
 	}
 
