@@ -50,7 +50,6 @@ public class NinjaHook : MonoBehaviour {
         if (isCutting) {
             updateCut();
         }
-		
 	}
 
     void startCutting()
@@ -74,8 +73,8 @@ public class NinjaHook : MonoBehaviour {
 
     void updateCut() {
         rb.position = getPosition();
-		velocity = (rb.position - previousPosition) / Time.deltaTime;
-		speed = (rb.position - previousPosition).magnitude * Time.deltaTime;
+		velocity = (rb.position - previousPosition) / (Time.deltaTime * Screen.height);
+		speed = velocity.magnitude;
 
         //if (velocity > minCutVelocity) {
         //    circleCollider2D.enabled = true;

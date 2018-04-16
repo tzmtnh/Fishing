@@ -35,7 +35,7 @@ public class Entities : MonoBehaviour {
 
 	void generateEntities() {
 		foreach (Entity prefab in entityPrefabs) {
-			int n = Mathf.RoundToInt(prefab.population * densityMultiplier);
+			int n = Mathf.CeilToInt(prefab.population * densityMultiplier);
 			for (int i = 0; i < n; i++) {
 				float r = getRandomValueByDistribution(prefab.probabilityByDepth);
 				float y = Mathf.Lerp(depthRange.x, depthRange.y, r);
