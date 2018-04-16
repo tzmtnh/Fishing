@@ -117,6 +117,8 @@ public class Hook : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D collision) {
 		if (_state == State.GoingDown && collision.CompareTag("Ground")) {
+			AudioManager.inst.playSound("Reverse_SFX");
+			AudioManager.inst.playFishingMusic(true);
 			_state = State.GoingUp;
 		} else if (_state == State.GoingUp && collision.CompareTag("SeaLevel")) {
 			_state = State.Idle;

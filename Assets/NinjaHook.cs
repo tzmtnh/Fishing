@@ -1,15 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class NinjaHook : MonoBehaviour {
 
-    public GameObject ninjaHookTrailPrefab;
+	public static NinjaHook inst;
+
+	public GameObject ninjaHookTrailPrefab;
     GameObject currentTrail;
 
     public float minCutVelocity = .008f;
     public float gentleCutThreshold = .005f;
-    public float currentVelocity = 0.0f;
+
+	[System.NonSerialized] public float speed = 0.0f;
+	[System.NonSerialized] public Vector2 velocity;
     Vector2 previousPosition;
 
     public bool isCutting = false; 
@@ -20,16 +25,17 @@ public class NinjaHook : MonoBehaviour {
 
     Camera cam;
 
-	// Use this for initialization
+	void Awake() {
+		Assert.IsNull(inst);
+		inst = this;
+	}
+
 	void Start () {
         rb = GetComponent<Rigidbody2D>();
-
         cam = Camera.main;
-
         circleCollider2D = GetComponent<CircleCollider2D>();
 	}
 	
-	// Update is called once per frame
 	void Update () {
         if (GameManager.inst.state != (GameManager.GameState.Ninja)) {
             return;
@@ -54,7 +60,7 @@ public class NinjaHook : MonoBehaviour {
         currentTrail = Instantiate(ninjaHookTrailPrefab, transform);
         currentTrail.transform.localPosition = new Vector3();
         previousPosition = rb.position;
-        currentVelocity = 0.0f;
+        speed = 0.0f;
         circleCollider2D.enabled = true;
     }
 
@@ -62,13 +68,14 @@ public class NinjaHook : MonoBehaviour {
         isCutting = false;
         currentTrail.transform.SetParent(null);
         Destroy(currentTrail, 2f);
-        currentVelocity = 0.0f;
+        speed = 0.0f;
         circleCollider2D.enabled = false;
     }
 
     void updateCut() {
         rb.position = getPosition();
-        currentVelocity = (rb.position - previousPosition).magnitude * Time.deltaTime;
+		velocity = (rb.position - previousPosition) / Time.deltaTime;
+		speed = (rb.position - previousPosition).magnitude * Time.deltaTime;
 
         //if (velocity > minCutVelocity) {
         //    circleCollider2D.enabled = true;
