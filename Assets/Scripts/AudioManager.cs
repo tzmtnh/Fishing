@@ -123,7 +123,7 @@ public class AudioManager : MonoBehaviour {
     public void playThemeMusic() {
         stopSound(musicPlaying);
         musicPlaying = playSound("Boat_Theme_Intro", defaultMusicVolume, 1, false);
-        Invoke("playThemeMusicLoop", 3.95f);
+        Invoke("playThemeMusicLoop", musicPlaying.clip.length);
 
     }
 
@@ -150,6 +150,16 @@ public class AudioManager : MonoBehaviour {
 
     public void playNinjaMusic() {
         stopSound(musicPlaying);
-        musicPlaying = playSound("Ninja_Music", defaultMusicVolume, 1, true);
+        musicPlaying = playSound("Ninja_Music_Intro", defaultMusicVolume, 1, false);
+        Invoke("playNinjaMusicLoop", musicPlaying.clip.length);
+    }
+
+    public void playNinjaMusicLoop()
+    {
+        if (GameManager.inst.state == GameManager.GameState.Ninja)
+        {
+            stopSound(musicPlaying);
+            musicPlaying = playSound("Ninja_Music", defaultMusicVolume, 1, true);
+        }
     }
 }
