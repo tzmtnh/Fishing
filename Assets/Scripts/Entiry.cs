@@ -21,6 +21,7 @@ public abstract class Entity : MonoBehaviour {
 	protected SpriteRenderer _sprite;
 	protected Collider2D _collider;
     protected WheelJoint2D _joint;
+    protected ParticleSystem _particleSystem;
 	protected State _state = State.InWater;
 	float _initMass;
 
@@ -44,6 +45,13 @@ public abstract class Entity : MonoBehaviour {
 		_rigidbody.gravityScale = 1;
 
 		Physics2D.IgnoreCollision(_collider, c, true);
+
+        if (_particleSystem != null)
+        {
+            Debug.Log("stopping emission!");
+            _particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+        }
+
 	}
 
     public void detachAndLaunch() {
@@ -59,6 +67,8 @@ public abstract class Entity : MonoBehaviour {
 
 		_state = State.Flying;
         AudioManager.inst.playSound("Leaving_Water");
+
+
     }
 
     void delayedLayerCollisions() {
@@ -71,6 +81,7 @@ public abstract class Entity : MonoBehaviour {
 		_sprite = GetComponent<SpriteRenderer>();
 		_rigidbody = GetComponent<Rigidbody2D>();
 		_initMass = _rigidbody.mass;
+        _particleSystem = GetComponentInChildren<ParticleSystem>();
 
 		LayerMask layer = LayerMask.NameToLayer("Entities");
 		Physics2D.IgnoreLayerCollision(layer, layer, true);

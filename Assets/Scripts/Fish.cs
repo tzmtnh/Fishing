@@ -32,8 +32,13 @@ public class Fish : Entity {
 
 	protected override void Update() {
 		base.Update();
-		if (_state != State.InWater) return;
+
+        if (_state != State.InWater) {
+            return;
+        }
 		_sprite.flipX = _dir > 0;
+
+
 	}
 
     protected override void onCollisionEnter2D(Collision2D collision) {
