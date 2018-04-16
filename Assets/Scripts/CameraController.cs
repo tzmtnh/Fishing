@@ -6,6 +6,7 @@ public class CameraController : MonoBehaviour {
 
 	public float hookBoarderY = -1;
     public float smoothSpeed = 0.1f;
+	public float ratio = 0.6f;
     public Vector3 offset;
     public Vector3 target;
 
@@ -54,6 +55,15 @@ public class CameraController : MonoBehaviour {
 		_pos = transform.position;
         target = _pos;
         _initial_pos = _pos;
+
+		if (Application.platform != RuntimePlatform.Android) {
+			Camera c = Camera.main;
+			Rect r = c.rect;
+			float a = (float)Screen.height / Screen.width * ratio;
+			r.width = a;
+			r.x = (1f - a) / 2f;
+			c.rect = r;
+		}
 	}
 
 	Vector3 _velocity;

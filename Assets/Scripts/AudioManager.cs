@@ -145,7 +145,6 @@ public class AudioManager : MonoBehaviour {
         } else {
             musicPlaying = playSound("Fishing_Music", defaultMusicVolume, 1, true);
         }
-
     }
 
     public void playNinjaMusic() {

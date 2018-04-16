@@ -16,14 +16,14 @@ public class TrashSpawner : MonoBehaviour {
 	private void Awake()
 	{
         inst = this;
-        GameManager.inst.onGameStateChanged += _start;
 	}
 
 	void Start () {
         trashObjList = new List<Entity>();
+		GameManager.inst.onGameStateChanged += _start;
 	}
 
-    void _start(GameManager.GameState old, GameManager.GameState current) {
+	void _start(GameManager.GameState old, GameManager.GameState current) {
         if (!current.Equals(GameManager.GameState.Ninja)) {
             return;
         }
