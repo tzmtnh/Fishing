@@ -72,6 +72,10 @@ public class InputManager : MonoBehaviour {
 				horizontal = 1;
 			}
 		}
+
+		if (Input.GetKeyDown(KeyCode.Escape)) {
+			Application.Quit();
+		}
 	}
 
 	/*
