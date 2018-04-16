@@ -42,11 +42,10 @@ public class Fish : Entity {
 			_dir = -_dir;
         } else if (_state == State.Flying && 
                    collision.collider.CompareTag("NinjaHook")) {
-            NinjaHook ninjaHook = collision.collider.transform.GetComponent<NinjaHook>();
-            Debug.Log("Ninja fish collision!");
-            if (isTurtle && ninjaHook.currentVelocity < ninjaHook.gentleCutThreshold)
+            //Debug.Log("Ninja fish collision!");
+            if (isTurtle && NinjaHook.inst.speed < NinjaHook.inst.gentleCutThreshold)
             {
-                Debug.Log("Hook velocity that released me (Turtle)" + ninjaHook.currentVelocity);
+               // Debug.Log("Hook velocity that released me (Turtle)" + ninjaHook.currentVelocity);
                 int score = 2 * price;
                 GameManager.inst.addScore(this, score);
                 //TrashSpawner.inst.trashObjList.Remove(this);

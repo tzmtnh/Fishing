@@ -90,13 +90,56 @@ public abstract class Entity : MonoBehaviour {
         }
 	}
 
+	void slice() {
+		foreach (Transform child in transform) {
+			Destroy(child.gameObject);
+		}
+
+		Vector2 velocity = NinjaHook.inst.velocity;
+		float angle = Vector2.Angle(velocity, Vector2.up);
+		angle = angle - _rigidbody.rotation;
+
+		_sprite.material.SetFloat("_Sliced", 1);
+		_sprite.material.SetFloat("_Angle", angle);
+
+		GameObject go = Instantiate(gameObject);
+		go.name = gameObject.name + " Slice";
+		Destroy(go.GetComponent<Entity>());
+
+		SpriteRenderer other = go.GetComponent<SpriteRenderer>();
+		other.material.SetFloat("_Angle", angle + 180);
+
+		Collider2D otherCollider = go.GetComponent<Collider2D>();
+		Physics2D.IgnoreCollision(_collider, otherCollider, true);
+
+		StartCoroutine(sliceCo(other));
+	}
+
+	IEnumerator sliceCo(SpriteRenderer part) {
+		const float duration = 1;
+		float timer = 0;
+		Color c = Color.white;
+
+		while (timer < duration) {
+			float t = timer / duration;
+
+			c.a = 1f - t;
+			part.color = c;
+			_sprite.color = c;
+
+			timer += Time.deltaTime;
+			yield return null;
+		}
+
+		Destroy(part.gameObject);
+		Destroy(gameObject);
+	}
+
 	protected virtual void onCollisionEnter2D(Collision2D collision) { }
 
 	private void OnCollisionEnter2D(Collision2D collision) {
 		if (collision.collider.CompareTag("NinjaHook")) {
-            NinjaHook ninjaHook = collision.collider.transform.GetComponent<NinjaHook>();
-
-            if (ninjaHook.currentVelocity >= ninjaHook.minCutVelocity)
+            if (NinjaHook.inst.speed >= NinjaHook.inst.minCutVelocity)
             {
                 //Debug.Log("Hook velocity that killed me " + ninjaHook.currentVelocity);
                 if (isGarbage) {
@@ -107,7 +150,8 @@ public abstract class Entity : MonoBehaviour {
                 int score = price * (isGarbage ? 1 : -1);
                 GameManager.inst.addScore(this, score);
                 TrashSpawner.inst.trashObjList.Remove(this);
-                Destroy(gameObject);
+
+				slice();
                 return;
             }
 		}
