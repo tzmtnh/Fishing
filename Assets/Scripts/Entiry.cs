@@ -5,7 +5,7 @@ using System;
 
 public abstract class Entity : MonoBehaviour {
 
-	protected enum State { InWater, Attached, Flying }
+	protected enum State { InWater, Attached, Flying, Sliced }
 
 	public int population = 10;
 	public int price = 10;
@@ -149,11 +149,15 @@ public abstract class Entity : MonoBehaviour {
 	protected virtual void onCollisionEnter2D(Collision2D collision) { }
 
 	private void OnCollisionEnter2D(Collision2D collision) {
+		if (_state == State.Sliced) return;
+
 		if (collision.collider.CompareTag("NinjaHook")) {
             if (NinjaHook.inst.speed >= NinjaHook.inst.minCutVelocity)
             {
-                //Debug.Log("Hook velocity that killed me " + ninjaHook.currentVelocity);
-                if (isGarbage) {
+				_state = State.Sliced;
+
+				//Debug.Log("Hook velocity that killed me " + ninjaHook.currentVelocity);
+				if (isGarbage) {
                     AudioManager.inst.playSound("Garbage_Slice");
                 } else {
                     AudioManager.inst.playSound("Fish_Slice");
