@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Camera))]
 public class CameraController : MonoBehaviour {
 
 	public float hookBoarderY = -1;
     public float smoothSpeed = 0.1f;
-	public float ratio = 0.6f;
     public Vector3 offset;
     public Vector3 target;
 
+	Camera _camera;
 	Vector3 _pos;
     Vector3 _initial_pos;
 
@@ -52,22 +53,27 @@ public class CameraController : MonoBehaviour {
     }
 
 	void Start () {
+		_camera = GetComponent<Camera>();
 		_pos = transform.position;
         target = _pos;
         _initial_pos = _pos;
+	}
 
-		if (Application.platform != RuntimePlatform.Android) {
-			Camera c = Camera.main;
-			Rect r = c.rect;
-			float a = (float)Screen.height / Screen.width * ratio;
-			r.width = a;
-			r.x = (1f - a) / 2f;
-			c.rect = r;
-		}
+	void crop() {
+		if (Application.platform == RuntimePlatform.Android) return;
+
+		const float ratio = 5f / 8f;
+		Rect r = _camera.rect;
+		float a = (float)Screen.height / Screen.width * ratio;
+		r.width = a;
+		r.x = (1f - a) / 2f;
+		_camera.rect = r;
 	}
 
 	Vector3 _velocity;
 	void Update () {
+		crop();
+
 		switch (GameManager.inst.state) {
 			case GameManager.GameState.StartMenu:
 				break;
