@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   population: 2
-  price: 1000
+  price: 100
   startForce: 10
   probabilityByDepth:
     serializedVersion: 2

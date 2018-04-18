@@ -14,6 +14,13 @@ public class EndGameUI : MonoBehaviour {
 
 	IEnumerator playAnimation() {
 		var entries = GameManager.inst.scoreEntries;
+		if (entries.Count == 0) {
+			entityImage.enabled = false;
+			scoreText.text = "$0";
+			yield break;
+		}
+
+		entityImage.enabled = true;
 		List<GameManager.ScoreEntry> scoreEntries = new List<GameManager.ScoreEntry>(entries.Count);
 		foreach (var item in entries) {
 			scoreEntries.Add(item.Value);

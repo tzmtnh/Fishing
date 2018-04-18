@@ -28,16 +28,14 @@ public class CameraController : MonoBehaviour {
         float min_y = 1000;
         bool all_null = true;
         TrashSpawner trashSpawner = TrashSpawner.inst;
-        foreach (Entity go in trashSpawner.trashObjList)
+        foreach (Entity entity in trashSpawner.trashObjList)
         {
-            if (go == null)
-            {
-                continue;
-            }
+            if (entity == null) continue;
+			if (entity.isFish) continue;
             all_null = false;
-            float curr_y = go.GetComponent<Rigidbody2D>().position.y;
-            if (curr_y < min_y)
-            {
+
+            float curr_y = entity.GetComponent<Rigidbody2D>().position.y;
+            if (curr_y < min_y) {
                 min_y = curr_y;
             }
         }

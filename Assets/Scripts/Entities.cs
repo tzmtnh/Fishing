@@ -34,17 +34,38 @@ public class Entities : MonoBehaviour {
 	}
 
 	void generateEntities() {
+		List<Vector2> usedRadiusesAndHeights = new List<Vector2>(128);
+
 		foreach (Entity prefab in entityPrefabs) {
 			int n = Mathf.CeilToInt(prefab.population * densityMultiplier);
-			for (int i = 0; i < n; i++) {
-				float r = getRandomValueByDistribution(prefab.probabilityByDepth);
-				float y = Mathf.Lerp(depthRange.x, depthRange.y, r);
-				float w = prefab.isGarbage ? 4f : 1f;
-				float x = Random.Range(-1f, 1f) * w;
+			CapsuleCollider2D collider = prefab.GetComponent<CapsuleCollider2D>();
+			float r = collider.size.y * prefab.transform.localScale.y / 2f;
 
-				Entity entity = Instantiate(prefab, transform);
-				entity.name = prefab.name;
-				entity.transform.position = new Vector3(x, y, 0);
+			for (int i = 0; i < n; i++) {
+				for (int j = 0; j < 100; j++) {
+					float rand = getRandomValueByDistribution(prefab.probabilityByDepth);
+					float y = Mathf.Lerp(depthRange.x, depthRange.y, rand);
+
+					bool valid = true;
+					foreach (Vector2 rh in usedRadiusesAndHeights) {
+						float usedR = rh.x;
+						float usedY = rh.y;
+						if (Mathf.Abs(y - usedY) < r + usedR) {
+							valid = false;
+							break;
+						}
+					}
+					if (valid == false) continue;
+					usedRadiusesAndHeights.Add(new Vector2(r, y));
+
+					float w = prefab.isGarbage ? 4f : 1f;
+					float x = Random.Range(-1f, 1f) * w;
+
+					Entity entity = Instantiate(prefab, transform);
+					entity.name = prefab.name;
+					entity.transform.position = new Vector3(x, y, 0);
+					break;
+				}
 			}
 		}
 	}

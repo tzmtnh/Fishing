@@ -55,20 +55,19 @@ public abstract class Entity : MonoBehaviour {
 	}
 
     public void detachAndLaunch() {
-        _rigidbody.mass = _initMass;
+		_rigidbody.velocity = new Vector2();
+		_rigidbody.mass = _initMass;
         _joint.enabled = false;
         _rigidbody.drag = 0.25f;
         _rigidbody.gravityScale = 0.25f;
         Invoke("delayedLayerCollisions", UnityEngine.Random.Range(1.0f, 2.0f));
-        _rigidbody.AddForce(transform.up *
-                            UnityEngine.Random.Range(0.7f, 1.3f) * startForce * _initMass,
+        _rigidbody.AddForce(Vector2.up *
+                            UnityEngine.Random.Range(0.7f, 1.3f) * 1.5f * startForce * _initMass,
                             ForceMode2D.Impulse);
         _rigidbody.AddTorque(UnityEngine.Random.Range(-200f, 200f));
 
 		_state = State.Flying;
         AudioManager.inst.playSound("Leaving_Water");
-
-
     }
 
     void delayedLayerCollisions() {
@@ -89,7 +88,6 @@ public abstract class Entity : MonoBehaviour {
 
 	protected virtual void Update()
 	{
-
         if (_state == State.Flying && _rigidbody.position.y < 0.6) {
             if (isGarbage) {
                 AudioManager.inst.playSound("Garbage_Enter_Water");

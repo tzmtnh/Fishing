@@ -4,14 +4,9 @@ using UnityEngine;
 
 public class TrashSpawner : MonoBehaviour {
 
-    public Entity trashPrefab;
-    public int maxSpawns = 15;
-    public float startForce = 10f;
-    public List<Entity> trashObjList;
+	public static TrashSpawner inst = null;
 
-    public static TrashSpawner inst = null;
-
-    Rigidbody2D rb;
+	public List<Entity> trashObjList;
 
 	private void Awake()
 	{
@@ -29,10 +24,10 @@ public class TrashSpawner : MonoBehaviour {
         }
 
         foreach (Entity attachedEntity in Hook.inst.attachedEntities) {
-            Transform spawnPoint = Hook.inst.rigid.transform;
-            Quaternion tmp = spawnPoint.rotation;
-            tmp.z += Random.Range(-0.025f, 0.025f);
-            spawnPoint.rotation = tmp;
+            //Transform spawnPoint = Hook.inst.rigid.transform;
+            //Quaternion tmp = spawnPoint.rotation;
+            //tmp.z += Random.Range(-0.025f, 0.025f);
+            //spawnPoint.rotation = tmp;
             attachedEntity.detachAndLaunch();
             trashObjList.Add(attachedEntity);
             //Destroy(spawnedTrash, 5f);

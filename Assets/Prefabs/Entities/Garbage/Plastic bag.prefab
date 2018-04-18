@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   population: 4
-  price: 30
+  price: 5
   startForce: 15
   probabilityByDepth:
     serializedVersion: 2
