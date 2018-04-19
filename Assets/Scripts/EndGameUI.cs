@@ -12,15 +12,15 @@ public class EndGameUI : MonoBehaviour {
 	public Text entityCount;
 	public Text entityPrice;
 
+	void restartGame() {
+		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+	}
+
 	IEnumerator playAnimation() {
 		var entries = GameManager.inst.scoreEntries;
-		if (entries.Count == 0) {
-			entityImage.enabled = false;
-			scoreText.text = "$0";
-			yield break;
-		}
+		scoreText.text = "$0";
+		entityImage.enabled = entries.Count > 0;
 
-		entityImage.enabled = true;
 		List<GameManager.ScoreEntry> scoreEntries = new List<GameManager.ScoreEntry>(entries.Count);
 		foreach (var item in entries) {
 			scoreEntries.Add(item.Value);
@@ -67,7 +67,7 @@ public class EndGameUI : MonoBehaviour {
 
         // restart
         yield return new WaitForSeconds(5.0f);  // or however long you want it to wait
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+		restartGame();
 	}
 
 	void OnEnable() {

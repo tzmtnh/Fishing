@@ -25,27 +25,37 @@ public class CameraController : MonoBehaviour {
 
     void updateNinja() {
         // find lowest object
-        float min_y = 1000;
-        bool all_null = true;
-        TrashSpawner trashSpawner = TrashSpawner.inst;
-        foreach (Entity entity in trashSpawner.trashObjList)
-        {
-            if (entity == null) continue;
+        float min_y = float.MaxValue;
+		bool found = false;
+        foreach (Entity entity in TrashSpawner.inst.trashObjList) {
 			if (entity.isFish) continue;
-            all_null = false;
 
-            float curr_y = entity.GetComponent<Rigidbody2D>().position.y;
+			found = true;
+            float curr_y = entity.transform.position.y;
             if (curr_y < min_y) {
                 min_y = curr_y;
             }
         }
-        if (min_y < 1000f && min_y > 4f)
+
+		if (found == false) {
+			foreach (Entity entity in TrashSpawner.inst.trashObjList) {
+				if (entity.isGarbage) continue;
+
+				found = true;
+				float curr_y = entity.transform.position.y;
+				if (curr_y < min_y) {
+					min_y = curr_y;
+				}
+			}
+		}
+
+        if (found && min_y > 4f)
         {
             Vector3 pos = transform.position;
             _pos.y = min_y + 1.5f;
             //transform.position = _pos;
             target = _pos;
-        } else if (all_null) {
+        } else if (found == false) {
             target = _initial_pos;
         }
     }
